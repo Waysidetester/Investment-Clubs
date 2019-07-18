@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29102.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Investment-Clubs", "Investment-Clubs\Investment-Clubs.csproj", "{0F4F5DC0-315C-4200-AAA4-BBDA08794F51}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Investment-Clubs", "Investment-Clubs\Investment-Clubs.csproj", "{0F4F5DC0-315C-4200-AAA4-BBDA08794F51}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Invesetment-Club.Test", "Invesetment-Club.Test\Invesetment-Club.Test.csproj", "{F85E8229-1F90-44E6-9B20-5645C178BDD3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{0F4F5DC0-315C-4200-AAA4-BBDA08794F51}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0F4F5DC0-315C-4200-AAA4-BBDA08794F51}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0F4F5DC0-315C-4200-AAA4-BBDA08794F51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F85E8229-1F90-44E6-9B20-5645C178BDD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F85E8229-1F90-44E6-9B20-5645C178BDD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F85E8229-1F90-44E6-9B20-5645C178BDD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F85E8229-1F90-44E6-9B20-5645C178BDD3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
