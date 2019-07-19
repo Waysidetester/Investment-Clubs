@@ -1,13 +1,12 @@
 import React from 'react';
+import MyNav from '../SiteWide/MyNav/MyNav';
 
 
-export default class App extends React.Component {
-  displayName = App.name
-
+export default class App extends React.Component{
   render() {
     return (
         <div>
-          <p>App is linked</p>
+          <MyNav />
         </div>
     );
   }
