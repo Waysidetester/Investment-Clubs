@@ -27,7 +27,7 @@ class MyNav extends React.Component{
         <Collapse isOpen={this.state.isOpen} navbar>
           <Nav className="ml-auto" navbar>
             <NavItem>
-              <NavLink href="/components/">Your Profile</NavLink>
+              <NavLink href="/account">Your Profile</NavLink>
             </NavItem>
             <NavItem>
               <NavLink href="https://github.com/reactstrap/reactstrap">Club Page</NavLink>

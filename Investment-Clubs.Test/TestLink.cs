@@ -1,8 +1,7 @@
-using Pages;
-using System;
+using Investment_Clubs;
 using Xunit;
 
-namespace Invesetment_Club.Test
+namespace Invesetment_Clubs.Test
 {
     public class TestingTestLink
     {
