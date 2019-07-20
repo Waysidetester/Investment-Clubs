@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Investment_Clubs.Models.Clubs
 {
-    public class UsersClubs
+    public class UsersClubs : IUsersClubs
     {
         public string ClubName { get; set; }
         public int PartnerCount { get; set; }

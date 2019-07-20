@@ -19,9 +19,10 @@ namespace Investment_Clubs.Controllers
         }
 
         [HttpGet]
-        public IActionResult Test()
+        public IActionResult Test(int userId)
         {
-            var x = _connections.GetClubsForUser();
+            var x = _connections.GetClubsForUser(userId);
+
             return Accepted(x);
         }
     }
