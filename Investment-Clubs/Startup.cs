@@ -9,6 +9,11 @@ namespace Investment_Clubs
 {
     public class Startup
     {
+        public class DbConfiguration
+        {
+            public string ConnectionString { get; set; }
+        }
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -20,6 +25,8 @@ namespace Investment_Clubs
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.Configure<DbConfiguration>(Configuration);
+
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
