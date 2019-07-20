@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Investment_Clubs.Database.Clubs;
 
 namespace Investment_Clubs.Controllers
@@ -21,9 +17,16 @@ namespace Investment_Clubs.Controllers
         [HttpGet]
         public IActionResult GetClubsForUser(int userId)
         {
-            var x = _connections.GetClubsForUser(userId);
+            try
+            {
+                var usersClubs = _connections.GetClubsForUser(userId);
 
-            return Accepted(x);
+                return Accepted(usersClubs);
+            }
+            catch
+            {
+                return BadRequest("The user isn't participating in any clubs");
+            }
         }
     }
 }

@@ -14,6 +14,7 @@ export default class App extends React.Component{
     userId: window.localStorage.getItem("userId")
   }
   render() {
+    // parsing userId to int for axios calls
     const currentUser = parseInt(this.state.userId, 10)
 
     return (

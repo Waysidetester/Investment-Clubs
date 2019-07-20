@@ -15,6 +15,7 @@ namespace Investment_Clubs.Database.Clubs
             _connectionString = dbConfig.Value.ConnectionString;
         }
 
+        // Returns a list of clubs that the user is a partner to
         public IEnumerable<IUsersClubs> GetClubsForUser(int partnerId)
         {
             using (SqlConnection db = new SqlConnection(_connectionString))
@@ -23,11 +24,12 @@ namespace Investment_Clubs.Database.Clubs
                                        FROM Partner as p
                                            join PartnerClub as pc on pc.PartnerId = p.Id
                                            join Club as c on pc.ClubId = c.Id
-                                       WHERE p.Id = 1";
+                                       WHERE p.Id = @PartnerId";
                 var parameters = new { PartnerId = partnerId };
 
                 var clubs = db.Query<UsersClubs>(selectQuery, parameters);
 
+                // Ensures there is a return value
                 if (clubs != null)
                 {
                     return clubs;
