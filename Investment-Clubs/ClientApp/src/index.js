@@ -7,6 +7,8 @@ import registerServiceWorker from './registerServiceWorker';
 
 const rootElement = document.getElementById('root');
 
+window.localStorage.setItem("userId", 1)
+
 ReactDOM.render(<App />, rootElement);
 
 registerServiceWorker();

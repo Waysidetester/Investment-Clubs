@@ -10,16 +10,21 @@ import Account from '../Pages/Account/Account';
 
 
 export default class App extends React.Component{
+  state = {
+    userId: window.localStorage.getItem("userId")
+  }
   render() {
+    const currentUser = parseInt(this.state.userId, 10)
+
     return (
         <div>
           <BrowserRouter>
             <React.Fragment>
               <MyNav />
               <Switch>
-                <Route path='/' exact component={Home}/>
-                <Route path='/home' component={Home} />
-                <Route path='/account' component={Account} />
+                <Route path='/' exact render={() => <Home currentUser={currentUser} />} />
+                <Route path='/home' render={() => <Home currentUser={currentUser} />} />
+                <Route path='/account' render={() => <Account currentUser={currentUser} />} />
               </Switch>
             </React.Fragment>
           </BrowserRouter>

@@ -19,7 +19,7 @@ namespace Investment_Clubs.Controllers
         }
 
         [HttpGet]
-        public IActionResult Test(int userId)
+        public IActionResult GetClubsForUser(int userId)
         {
             var x = _connections.GetClubsForUser(userId);
 
