@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Investment_Clubs.Database.Clubs;
+using Investment_Clubs.Database.Investments;
 
 namespace Investment_Clubs
 {
@@ -29,6 +30,7 @@ namespace Investment_Clubs
             services.Configure<DbConfiguration>(Configuration);
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddTransient<UserLevel>();
+            services.AddTransient<QuickVotes>();
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
