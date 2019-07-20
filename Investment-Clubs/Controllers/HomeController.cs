@@ -25,7 +25,7 @@ namespace Investment_Clubs.Controllers
             }
             catch
             {
-                return BadRequest("The user isn't participating in any clubs");
+                return BadRequest();
             }
         }
     }

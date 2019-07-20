@@ -1,9 +1,13 @@
 import React from 'react';
 import ProspGerm from '../../Db/ProspGerm/ProspGermFactory';
+import ClubsBasicsContainer from '../../components/Club/ClubsBasicsContainer';
 import './Home.scss';
 
 class Home extends React.Component{
-  
+  state = {
+    clubs: null,
+  }
+
   componentDidMount(){
     ProspGerm.GetClubsForUser(this.props.currentUser)
       .then((res) => {
@@ -13,9 +17,11 @@ class Home extends React.Component{
   }
 
   render() {
+    
     return(
       <div>
         <h1>Home page</h1>
+        <ClubsBasicsContainer clubs={this.state.clubs}/>
       </div>
     );
   }

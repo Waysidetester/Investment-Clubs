@@ -29,7 +29,7 @@ namespace Investment_Clubs.Database.Clubs
 
                 var clubs = db.Query<UsersClubs>(selectQuery, parameters);
 
-                // Ensures there is a return value
+                // Ensures there is a return value or throws an exception
                 if (clubs != null)
                 {
                     return clubs;
