@@ -4,11 +4,18 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Investment_Clubs.Database.Clubs;
 
 namespace Investment_Clubs
 {
+    public class DbConfiguration
+    {
+        public string ConnectionString { get; set; }
+    }
+
     public class Startup
     {
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -19,7 +26,9 @@ namespace Investment_Clubs
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<DbConfiguration>(Configuration);
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddTransient<UserLevel>();
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

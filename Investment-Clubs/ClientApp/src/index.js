@@ -7,6 +7,9 @@ import registerServiceWorker from './registerServiceWorker';
 
 const rootElement = document.getElementById('root');
 
+// Setting a defaut userId. Can alter later for true authentication
+window.localStorage.setItem("userId", 1)
+
 ReactDOM.render(<App />, rootElement);
 
 registerServiceWorker();
