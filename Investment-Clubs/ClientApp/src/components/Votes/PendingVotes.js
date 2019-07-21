@@ -1,5 +1,5 @@
 import React from 'react';
-import './Votes.scss';
+import './PendingVotes.scss';
 
 class PendingVotes extends React.Component{
   render() {

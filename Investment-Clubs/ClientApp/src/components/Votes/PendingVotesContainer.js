@@ -4,7 +4,7 @@ import './PendingVotesContainer.scss';
 
 class PendingVotesContainer extends React.Component{
   PendVoteGenerator = () => {
-    return this.props.votes.map(club => <PendingVotes vote={club} />);
+    return this.props.votes.map((vote, i) => <PendingVotes key={i} vote={vote} />);
   }
 
   render() {
