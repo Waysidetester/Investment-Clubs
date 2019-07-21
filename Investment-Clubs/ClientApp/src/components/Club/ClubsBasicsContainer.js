@@ -5,7 +5,7 @@ import {
   CardTitle,
   CardBody,
 } from 'reactstrap';
-import './ClubsBasics.scss';
+import './ClubsBasicsContainer.scss';
 
 class ClubsBasicsContainer extends React.Component{
   ClubBasicsGenerator = () => {
@@ -24,7 +24,7 @@ class ClubsBasicsContainer extends React.Component{
     return(
       <Card>
         <CardBody>
-          <CardTitle>Hello</CardTitle>
+          <CardTitle className='test'>Hello</CardTitle>
         </CardBody>
         <CardBody>
           {this.ClubBasicsGenerator()}
