@@ -2,10 +2,12 @@ import React from 'react';
 import ProspGerm from '../../Db/ProspGerm/ProspGermFactory';
 import ClubsBasicsContainer from '../../components/Club/ClubsBasicsContainer';
 import './Home.scss';
+import PendingVotesContainer from '../../components/Votes/PendingVotesContainer';
 
 class Home extends React.Component{
   state = {
     clubs: null,
+    votes: null,
   }
 
   componentDidMount(){
@@ -26,12 +28,15 @@ class Home extends React.Component{
     });
   }
 
+
+
   render() {
     
     return(
       <div>
         <h1>Home page</h1>
         <ClubsBasicsContainer clubs={this.state.clubs}/>
+        <PendingVotesContainer votes={this.state.votes}/>
       </div>
     );
   }
