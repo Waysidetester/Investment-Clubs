@@ -9,11 +9,21 @@ class Home extends React.Component{
   }
 
   componentDidMount(){
-    ProspGerm.GetClubsForUser(this.props.currentUser)
-      .then((res) => {
-        this.setState({ clubs: res.data })
-      })
-      .catch((err) => console.error(err));
+    this.DbCalls([
+      {funct: ProspGerm.GetClubsForUser, stateName: 'clubs'},
+      {funct: ProspGerm.GetVotesForUser, stateName:'votes'}
+    ]);
+  }
+
+  DbCalls = (asyncCalls) => {
+    asyncCalls.forEach(call => {
+      call['funct'](this.props.currentUser)
+        .then((res) => {
+          const name = call['stateName'];
+          this.setState({ [name]: res.data })
+        })
+        .catch((err) => console.error(err));
+    });
   }
 
   render() {
