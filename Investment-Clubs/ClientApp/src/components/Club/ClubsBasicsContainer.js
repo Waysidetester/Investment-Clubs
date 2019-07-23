@@ -23,8 +23,8 @@ class ClubsBasicsContainer extends React.Component{
 
     return(
       <Card>
-        <CardBody>
-          <CardTitle className='test'>Hello</CardTitle>
+        <CardBody className='home-clubs-container'>
+          <CardTitle><h2>Clubs</h2></CardTitle>
         </CardBody>
         <CardBody>
           {this.ClubBasicsGenerator()}
