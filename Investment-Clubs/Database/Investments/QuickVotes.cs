@@ -21,7 +21,7 @@ namespace Investment_Clubs.Database.Investments
         {
             using (SqlConnection db = new SqlConnection(_connectionString))
             {
-                string querystring = @"SELECT pci.id voteId, p.id userId, pci.Vote, pci.Abstain,
+                string querystring = @"SELECT pci.id, p.id userId, pci.Vote, pci.Abstain,
                                            i.ReceivingEntity, c.ClubName, it.InvestmentType
                                        FROM Partner as p
 	                                       join PartnerClub as pc on pc.PartnerId = p.Id
@@ -48,7 +48,7 @@ namespace Investment_Clubs.Database.Investments
         {
             using (SqlConnection db = new SqlConnection(_connectionString))
             {
-                string querystring = @"SELECT pci.id voteId, p.id userId
+                string querystring = @"SELECT pci.id, p.id userId
                                        FROM Partner as p
 	                                       join PartnerClub as pc on pc.PartnerId = p.Id
 	                                       join PartnerClubInvestment as pci on pci.PartnerClubId = pc.Id
