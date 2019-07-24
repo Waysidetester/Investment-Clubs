@@ -36,6 +36,12 @@ class VoteButtons extends React.Component{
     this.CheckCurrentVote();
   }
 
+  componentDidUpdate(prevProps){
+    if (this.props !== prevProps) {
+      this.CheckCurrentVote();
+    }
+  }
+
   MoldUpdateVote = (vote) => {
     let votePayload = {
       Id: this.props.vote.id,

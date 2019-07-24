@@ -31,7 +31,7 @@ class Home extends React.Component{
   UpdateVote = (decision) => {
     ProspGerm.CastUserVote(decision)
       .then(res => {
-        this.MutateVotesObject(res);
+        this.MutateVotesObject(res.data);
       })
       .catch(err => console.error(err));
   }
@@ -41,7 +41,7 @@ class Home extends React.Component{
     on what the database returns
   */
   MutateVotesObject = (asyncResults) => {
-    const voteStateCopy = this.state.votes;
+    const voteStateCopy = [...this.state.votes];
     const voteIndex = voteStateCopy.findIndex(vote => vote.id === asyncResults.id)
 
     voteStateCopy[voteIndex].vote = asyncResults.vote;
