@@ -7,6 +7,7 @@ import {
 import MyNav from '../SiteWide/MyNav/MyNav';
 import Home from '../Pages/Home/Home';
 import Account from '../Pages/Account/Account';
+import Disclaimer from '../SiteWide/Disclaimer/Disclaimer';
 import './App.scss';
 
 
@@ -23,6 +24,7 @@ export default class App extends React.Component{
           <BrowserRouter>
             <React.Fragment>
               <MyNav />
+              <Disclaimer />
               <div className='container'>
                 <Switch>
                   <Route path='/' exact render={() => <Home currentUser={currentUser} />} />
