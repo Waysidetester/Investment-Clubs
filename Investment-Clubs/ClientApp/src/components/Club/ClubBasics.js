@@ -1,10 +1,9 @@
 import React from 'react';
 import './ClubBasics.scss';
-
 class ClubBasics extends React.Component{
   render() {
     return(
-      <div>
+      <div className="single-club-basics">
         <p>Club: {this.props.club.clubName}</p>
         <p>Total partners: {this.props.club.partnerCount}</p>
         <p>Accredited partners: {this.props.club.accreditedPartnerCount}</p>

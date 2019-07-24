@@ -7,6 +7,7 @@ import {
 import MyNav from '../SiteWide/MyNav/MyNav';
 import Home from '../Pages/Home/Home';
 import Account from '../Pages/Account/Account';
+import './App.scss';
 
 
 export default class App extends React.Component{
@@ -22,11 +23,13 @@ export default class App extends React.Component{
           <BrowserRouter>
             <React.Fragment>
               <MyNav />
-              <Switch>
-                <Route path='/' exact render={() => <Home currentUser={currentUser} />} />
-                <Route path='/home' render={() => <Home currentUser={currentUser} />} />
-                <Route path='/account' render={() => <Account currentUser={currentUser} />} />
-              </Switch>
+              <div className='container'>
+                <Switch>
+                  <Route path='/' exact render={() => <Home currentUser={currentUser} />} />
+                  <Route path='/home' render={() => <Home currentUser={currentUser} />} />
+                  <Route path='/account' render={() => <Account currentUser={currentUser} />} />
+                </Switch>
+              </div>
             </React.Fragment>
           </BrowserRouter>
         </div>

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Investment_Clubs.Database.Clubs;
 using Investment_Clubs.Database.Investments;
+using Investment_Clubs.Models.Investments;
 
 namespace Investment_Clubs.Controllers
 {
@@ -37,9 +38,24 @@ namespace Investment_Clubs.Controllers
         {
             try
             {
-                var usersVotes = _investConnect.GetVotesForUser(userId);
+                var usersVotes = _investConnect.GetPendingVotesForUser(userId);
 
                 return Accepted(usersVotes);
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpPut("Votes")]
+        public IActionResult CastVoteDecision(UserVotes decision)
+        {
+            try
+            {
+                var updatedVote = _investConnect.CastUserVote(decision);
+
+                return Accepted(updatedVote);
             }
             catch
             {

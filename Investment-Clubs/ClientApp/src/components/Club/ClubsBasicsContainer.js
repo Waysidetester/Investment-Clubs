@@ -1,25 +1,35 @@
 import React from 'react';
 import ClubBasics from './ClubBasics';
-import './ClubsBasics.scss';
+import {
+  Card,
+  CardTitle,
+  CardBody,
+} from 'reactstrap';
+import './ClubsBasicsContainer.scss';
 
 class ClubsBasicsContainer extends React.Component{
   ClubBasicsGenerator = () => {
-    return this.props.clubs.map(club => <ClubBasics club={club} />);
+    return this.props.clubs.map((club, i) => <ClubBasics key={i} club={club} />);
   }
 
   render() {
     if(this.props.clubs <= 0){
       return (
-        <div>
+        <Card>
           <p>you are part of no clubs</p>
-        </div>
+        </Card>
       )
     }
 
     return(
-      <div>
-        {this.ClubBasicsGenerator()}
-      </div>
+      <Card>
+        <CardBody className='home-clubs-container'>
+          <CardTitle><h2>Clubs</h2></CardTitle>
+        </CardBody>
+        <CardBody>
+          {this.ClubBasicsGenerator()}
+        </CardBody>
+      </Card>
     );
   }
 }

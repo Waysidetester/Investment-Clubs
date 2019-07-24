@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using Microsoft.Extensions.Options;
@@ -15,11 +16,13 @@ namespace Investment_Clubs.Database.Investments
             _connectionString = dbConfig.Value.ConnectionString;
         }
 
-        public IEnumerable<IInvestment> GetVotesForUser(int id)
+        // returns all pending votes for the current user that is a part of that club
+        public IEnumerable<IUserVotes> GetPendingVotesForUser(int id)
         {
             using (SqlConnection db = new SqlConnection(_connectionString))
             {
-                string querystring = @"SELECT pci.Vote, pci.Abstain, i.ReceivingEntity, c.ClubName, it.InvestmentType
+                string querystring = @"SELECT pci.id, p.id userId, pci.Vote, pci.Abstain,
+                                           i.ReceivingEntity, c.ClubName, it.InvestmentType
                                        FROM Partner as p
 	                                       join PartnerClub as pc on pc.PartnerId = p.Id
 	                                       join PartnerClubInvestment as pci on pci.PartnerClubId = pc.Id
@@ -31,10 +34,77 @@ namespace Investment_Clubs.Database.Investments
 
                 var pendingInvestments = db.Query<PendingVotes>(querystring, parameters);
 
-                if(pendingInvestments != null)
+                if (pendingInvestments != null)
                 {
                     return pendingInvestments;
                 }
+            }
+            throw new Exception("trouble getting votes for user");
+        }
+
+
+        // returns all pending votes for the current user that is a part of that club
+        public IEnumerable<IUserVotes> GetVotesForUser(int id)
+        {
+            using (SqlConnection db = new SqlConnection(_connectionString))
+            {
+                string querystring = @"SELECT pci.id, p.id userId
+                                       FROM Partner as p
+	                                       join PartnerClub as pc on pc.PartnerId = p.Id
+	                                       join PartnerClubInvestment as pci on pci.PartnerClubId = pc.Id
+                                       WHERE p.Id=@UserId and pc.ApprovedMember=1";
+                var parameters = new { UserId = id };
+
+                var pendingInvestments = db.Query<UserVotes>(querystring, parameters);
+
+                if (pendingInvestments != null)
+                {
+                    return pendingInvestments;
+                }
+            }
+            throw new Exception("trouble getting votes for user");
+        }
+
+
+
+
+
+
+        public IUserVotes CastUserVote(UserVotes submittedVote)
+        {
+            using (SqlConnection db = new SqlConnection(_connectionString))
+            {
+                var UserVotes = GetVotesForUser(submittedVote.UserId).ToList();
+
+                if (UserVotes.FirstOrDefault(Vote => Vote.Id.Equals(submittedVote.Id)) != null)
+                {
+                    string querystring = @"	UPDATE PartnerClubInvestment
+	                                        SET Abstain = @Abstain
+	                                        if (SELECT Abstain FROM PartnerClubInvestment WHERE Id=@VoteId) = 1
+		                                        BEGIN
+			                                        UPDATE PartnerClubInvestment
+			                                        SET Vote = NULL
+			                                        OUTPUT inserted.*
+			                                        WHERE Id=@VoteId
+		                                        END
+	                                        else
+		                                        BEGIN
+			                                        UPDATE PartnerClubInvestment
+			                                        SET Vote = @Vote
+			                                        OUTPUT inserted.*
+			                                        WHERE Id=@VoteId
+		                                        END";
+                    var parameters = new { VoteId = submittedVote.Id, Vote = submittedVote.Vote, Abstain = submittedVote.Abstain };
+
+                    var pendingInvestments = db.QueryFirstOrDefault<PartnerClubInvestment>(querystring, parameters);
+
+                    if (pendingInvestments != null)
+                    {
+                        return pendingInvestments;
+                    }
+                }
+
+
             }
             throw new Exception("trouble getting votes for user");
         }
