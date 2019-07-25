@@ -34,11 +34,11 @@ namespace Investment_Clubs.Controllers
         }
 
         [HttpGet("Votes")]
-        public IActionResult GetPendingVotesForUser(int userId)
+        public IActionResult GetPendingVotesForUser(int partnerId)
         {
             try
             {
-                var usersVotes = _investConnect.GetPendingVotesForUser(userId);
+                var usersVotes = _investConnect.GetPendingVotesForUser(partnerId);
 
                 return Accepted(usersVotes);
             }

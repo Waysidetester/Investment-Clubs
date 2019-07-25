@@ -17,11 +17,30 @@ namespace Investment_Clubs.Database.Investments
         }
 
         // returns all pending votes for the current user that is a part of that club
-        public IEnumerable<IUserVotes> GetPendingVotesForUser(int id)
+        internal IEnumerable<IUserVotes> GetVotesForUser(int id, SqlConnection db)
+        {
+            string querystring = @"SELECT pci.id, p.id PartnerId
+                                       FROM Partner as p
+	                                       join PartnerClub as pc on pc.PartnerId = p.Id
+	                                       join PartnerClubInvestment as pci on pci.PartnerClubId = pc.Id
+                                       WHERE p.Id=@UserId and pc.ApprovedMember=1";
+            var parameters = new { UserId = id };
+
+            var pendingInvestments = db.Query<UserVotes>(querystring, parameters);
+
+            if (pendingInvestments != null)
+            {
+                return pendingInvestments;
+            }
+            throw new Exception("trouble getting votes for user");
+        }
+
+        // returns all pending votes for the current user that is a part of that club
+        internal IEnumerable<IUserVotes> GetPendingVotesForUser(int partnerId)
         {
             using (SqlConnection db = new SqlConnection(_connectionString))
             {
-                string querystring = @"SELECT pci.id, p.id userId, pci.Vote, pci.Abstain,
+                string querystring = @"SELECT pci.id, p.id PartnerId, pci.Vote, pci.Abstain,
                                            i.ReceivingEntity, c.ClubName, it.InvestmentType
                                        FROM Partner as p
 	                                       join PartnerClub as pc on pc.PartnerId = p.Id
@@ -30,7 +49,7 @@ namespace Investment_Clubs.Database.Investments
 	                                       join Club as c on c.Id = pc.ClubId
 	                                       join InvestmentType as it on it.Id = i.AssetType
                                        WHERE p.Id=@UserId and i.Pending=1 and pc.ApprovedMember=1";
-                var parameters = new { UserId = id };
+                var parameters = new { UserId = partnerId };
 
                 var pendingInvestments = db.Query<PendingVotes>(querystring, parameters);
 
@@ -42,39 +61,11 @@ namespace Investment_Clubs.Database.Investments
             throw new Exception("trouble getting votes for user");
         }
 
-
-        // returns all pending votes for the current user that is a part of that club
-        public IEnumerable<IUserVotes> GetVotesForUser(int id)
+        internal IUserVotes CastUserVote(UserVotes submittedVote)
         {
             using (SqlConnection db = new SqlConnection(_connectionString))
             {
-                string querystring = @"SELECT pci.id, p.id userId
-                                       FROM Partner as p
-	                                       join PartnerClub as pc on pc.PartnerId = p.Id
-	                                       join PartnerClubInvestment as pci on pci.PartnerClubId = pc.Id
-                                       WHERE p.Id=@UserId and pc.ApprovedMember=1";
-                var parameters = new { UserId = id };
-
-                var pendingInvestments = db.Query<UserVotes>(querystring, parameters);
-
-                if (pendingInvestments != null)
-                {
-                    return pendingInvestments;
-                }
-            }
-            throw new Exception("trouble getting votes for user");
-        }
-
-
-
-
-
-
-        public IUserVotes CastUserVote(UserVotes submittedVote)
-        {
-            using (SqlConnection db = new SqlConnection(_connectionString))
-            {
-                var UserVotes = GetVotesForUser(submittedVote.UserId).ToList();
+                var UserVotes = GetVotesForUser(submittedVote.PartnerId, db).ToList();
 
                 if (UserVotes.FirstOrDefault(Vote => Vote.Id.Equals(submittedVote.Id)) != null)
                 {

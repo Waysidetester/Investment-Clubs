@@ -45,7 +45,7 @@ class VoteButtons extends React.Component{
   MoldUpdateVote = (vote) => {
     let votePayload = {
       Id: this.props.vote.id,
-      UserId: this.props.vote.userId,
+      PartnerId: this.props.vote.partnerId,
     }
 
     const decision = Object.assign(votePayload, vote)
