@@ -8,7 +8,7 @@ class ClubBasics extends React.Component{
         <p>Total partners: {this.props.club.partnerCount}</p>
         <p>Accredited partners: {this.props.club.accreditedPartnerCount}</p>
         <p>Investable capital: {this.props.club.clubInvestable}</p>
-        <p>self directed fund? {this.props.club.selfDirected}</p>
+        <p>self directed fund? {this.props.club.selfDirected ? "Yes" : "No"}</p>
       </div>
     );
   }

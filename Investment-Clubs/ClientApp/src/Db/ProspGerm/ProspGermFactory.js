@@ -16,7 +16,7 @@ const GetClubsForUser = (authedUserId) => new Promise((Resolve, Reject) => {
 const GetVotesForUser = (authedUserId) => new Promise((Resolve, Reject) => {
   axios.get(`${baseUrl}/api/home/votes`, {
     params: {
-      userId: authedUserId
+      partnerId: authedUserId
     }
   })
   .then(res => Resolve(res))
