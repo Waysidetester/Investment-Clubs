@@ -42,11 +42,19 @@ namespace Investment_Clubs.Database.Clubs
         {
             using (SqlConnection db = new SqlConnection(_connectionString))
             {
-                string selectQuery = @"SELECT c.ClubName, c.PartnerCount, c.AccreditedPartnerCount, c.ClubInvestable, c.SelfDirected
-                                       FROM Partner as p
-                                           join PartnerClub as pc on pc.PartnerId = p.Id
-                                           join Club as c on pc.ClubId = c.Id
-                                       WHERE p.Id = @PartnerId";
+                string selectQuery = @"
+                    SELECT p.id PartnerId, pc.id PartnerClubId, pc.IsAdmin, pc.Investable PartnerInvestable,
+	                    pci.PercentContributed, i.DollarsInvested InvestmentAmount, c.Id ClubId,
+	                    c.ClubInvestable, c.PartnerCount, c.AccreditedPartnerCount, c.DollarsInvested,
+	                    c.ClubInvestable, c.SelfDirected
+                    FROM Partner p
+	                    join PartnerClub pc on p.Id = pc.PartnerId
+	                    join Club c on c.Id = pc.ClubId
+	                    join PartnerClubInvestment pci on pci.PartnerClubId = pc.id
+	                    join Investment i on i.ClubId = c.Id
+                    WHERE p.Id = @PartnerId and pc.ApprovedMember = 1 and i.Pending = 0
+
+";
                 var parameters = new { PartnerId = partnerId };
 
                 var clubs = db.Query<UsersClubs>(selectQuery, parameters);
