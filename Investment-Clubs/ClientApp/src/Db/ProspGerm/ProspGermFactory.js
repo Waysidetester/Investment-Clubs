@@ -6,7 +6,17 @@ const baseUrl = config.DbConfig.baseUrl;
 const GetClubsForUser = (authedUserId) => new Promise((Resolve, Reject) => {
   axios.get(`${baseUrl}/api/home/clubs`, {
     params: {
-      userId: authedUserId
+      partnerId: authedUserId
+    }
+  })
+  .then(res => Resolve(res))
+  .catch(err => Reject(err))
+});
+
+const GetClubDetailsForUser = (authedUserId) => new Promise((Resolve,Reject) => {
+  axios.get(`${baseUrl}/api/profile/clubs`, {
+    params: {
+      partnerId: authedUserId
     }
   })
   .then(res => Resolve(res))
@@ -31,6 +41,7 @@ const CastUserVote = (decision) => new Promise((Resolve, Reject) => {
 
 export default {
   GetClubsForUser,
+  GetClubDetailsForUser,
   GetVotesForUser,
   CastUserVote,
 }

@@ -38,24 +38,33 @@ namespace Investment_Clubs.Database.Clubs
             throw new Exception("User is not involved with any clubs");
         }
 
+        /*
+           SELECT p.id PartnerId, pc.id PartnerClubId, pc.IsAdmin, pc.Investable PartnerInvestable,
+	            pci.PercentContributed, i.DollarsInvested MoneyInvestedIn, c.Id ClubId,
+	            c.ClubName, c.PartnerCount, c.AccreditedPartnerCount, c.DollarsInvested,
+	            c.ClubInvestable, c.SelfDirected
+            FROM Partner p
+	            join PartnerClub pc on p.Id = pc.PartnerId
+	            join Club c on c.Id = pc.ClubId
+	            join PartnerClubInvestment pci on pci.PartnerClubId = pc.id
+	            join Investment i on i.ClubId = c.Id
+            WHERE p.Id = 1 and pc.ApprovedMember = 1 and i.Pending = 0
+        */
         internal IEnumerable<IUsersClubs> GetClubDetailsForUser(int partnerId)
         {
             using (SqlConnection db = new SqlConnection(_connectionString))
             {
                 string selectQuery = @"
                     SELECT p.id PartnerId, pc.id PartnerClubId, pc.IsAdmin, pc.Investable PartnerInvestable,
-	                    pci.PercentContributed, i.DollarsInvested MoneyInvestedIn, c.Id ClubId,
-	                    c.ClubName, c.PartnerCount, c.AccreditedPartnerCount, c.DollarsInvested,
+	                    c.Id ClubId, c.ClubName, c.PartnerCount, c.AccreditedPartnerCount, c.DollarsInvested,
 	                    c.ClubInvestable, c.SelfDirected
                     FROM Partner p
 	                    join PartnerClub pc on p.Id = pc.PartnerId
 	                    join Club c on c.Id = pc.ClubId
-	                    join PartnerClubInvestment pci on pci.PartnerClubId = pc.id
-	                    join Investment i on i.ClubId = c.Id
-                    WHERE p.Id = 1 and pc.ApprovedMember = 1 and i.Pending = 0";
+                    WHERE p.Id = 1 and pc.ApprovedMember = 1";
                 var parameters = new { PartnerId = partnerId };
 
-                var clubs = db.Query<UsersClubs>(selectQuery, parameters);
+                var clubs = db.Query<UsersClubDetails>(selectQuery, parameters);
 
                 // Ensures there is a return value or throws an exception
                 if (clubs != null)

@@ -1,5 +1,5 @@
 import React from 'react';
-import ClubBasics from './ClubBasics';
+import ClubBasics from '../Basics/ClubBasics';
 import {
   Card,
   CardTitle,
