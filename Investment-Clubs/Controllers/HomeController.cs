@@ -19,11 +19,11 @@ namespace Investment_Clubs.Controllers
         }
 
         [HttpGet("Clubs")]
-        public IActionResult GetClubsForUser(int userId)
+        public IActionResult GetClubsForUser(int partnerId)
         {
             try
             {
-                var usersClubs = _clubConnect.GetClubsForUser(userId);
+                var usersClubs = _clubConnect.GetClubsForUser(partnerId);
 
                 return Accepted(usersClubs);
             }

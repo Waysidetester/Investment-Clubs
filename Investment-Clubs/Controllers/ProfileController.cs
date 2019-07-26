@@ -22,7 +22,7 @@ namespace Investment_Clubs.Controllers
             _investConnect = investConnect;
         }
 
-        [HttpGet]
+        [HttpGet("clubs")]
         public IActionResult GetClubDetailsForUser(int partnerId)
         {
             try
