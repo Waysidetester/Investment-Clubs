@@ -1,6 +1,6 @@
 import React from 'react';
 import ProspGerm from '../../Db/ProspGerm/ProspGermFactory';
-import ClubsBasicsContainer from '../../components/Club/ClubsBasicsContainer';
+import ClubsBasicsContainer from '../../components/Club/BasicsContainer/ClubsBasicsContainer';
 import './Home.scss';
 import PendingVotesContainer from '../../components/Votes/Container/PendingVotesContainer';
 

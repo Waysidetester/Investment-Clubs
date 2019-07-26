@@ -1,8 +1,13 @@
 import React from 'react';
 import ProspGerm from '../../Db/ProspGerm/ProspGermFactory';
+import ClubDetailsContainer from '../../components/Club/DetailsContainer/ClubDetailsContainer';
 import './Account.scss';
 
 class Account extends React.Component{
+  state={
+    clubDetails: null,
+  }
+
 
   componentDidMount(){
     this.DbCalls([
@@ -25,6 +30,7 @@ class Account extends React.Component{
     return(
       <div>
         <h2>Account</h2>
+        <ClubDetailsContainer clubDetails={this.state.clubDetails}/>
       </div>
     );
   }
