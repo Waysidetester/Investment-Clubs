@@ -97,34 +97,5 @@ namespace Investment_Clubs.Database.Investments
             }
             throw new Exception("trouble getting votes for user");
         }
-
-        internal IEnumerable<ProfileInvestmentDetails> GetInvestmentDetailsForUser(int partnerId)
-        {
-            using (SqlConnection db = new SqlConnection(_connectionString))
-            {
-                string querystring = @"	
-                    SELECT p.id PartnerId, pci.PercentContributed, i.Id InvestmentId,
-	                    i.DollarsInvested TotalInvestment, i.ClubId, i.ReceivingEntity, it.InvestmentType
-                    FROM Partner p
-	                    join PartnerClub pc on p.Id = pc.PartnerId
-	                    join PartnerClubInvestment pci on pci.PartnerClubId = pc.id
-	                    join Investment i on i.Id = pci.InvestmentId
-	                    join InvestmentType it on it.Id = i.AssetType
-                    WHERE p.Id = @PartnerId and pc.ApprovedMember = 1 and i.Pending = 0 and pci.PercentContributed >  0";
-                var parameters = new { PartnerId = partnerId };
-
-                var partnerInvestments = db.Query<ProfileInvestmentDetails>(querystring, parameters);
-
-                if (partnerInvestments != null)
-                {
-                    partnerInvestments.ToList().ForEach(invest => 
-                        invest.PartnerContributed = (invest.PercentContributed * invest.TotalInvestment)
-                    );
-
-                    return partnerInvestments;
-                }
-            }
-            throw new Exception("I cannot get the investments this user's made");
-        }
     }
 }

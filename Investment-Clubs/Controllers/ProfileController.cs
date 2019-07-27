@@ -14,12 +14,14 @@ namespace Investment_Clubs.Controllers
     public class ProfileController : ControllerBase
     {
         readonly UserLevel _clubConnect;
-        readonly QuickVotes _investConnect;
+        readonly QuickVotes _voteConnect;
+        readonly InvestmentDetail _investmentDetail;
 
-        public ProfileController(UserLevel clubConnect, QuickVotes investConnect)
+        public ProfileController(UserLevel clubConnect, QuickVotes voteConnect, InvestmentDetail investConnect)
         {
             _clubConnect = clubConnect;
-            _investConnect = investConnect;
+            _voteConnect = voteConnect;
+            _investmentDetail = investConnect;
         }
 
         [HttpGet("clubs")]
@@ -42,13 +44,28 @@ namespace Investment_Clubs.Controllers
         {
             try
             {
-                var partnersInvestments = _investConnect.GetInvestmentDetailsForUser(partnerId);
+                var partnersInvestments = _investmentDetail.GetInvestmentDetailsForUser(partnerId);
 
                 return Accepted(partnersInvestments);
             }
             catch
             {
                 return BadRequest("unable to get investment details");
+            }
+        }
+
+        [HttpGet("investments/pending")]
+        public IActionResult GetPendingInvestmentsForUser(int partnerId)
+        {
+            try
+            {
+                var pendingInvestmentDetails = _investmentDetail.GetPendingInvestDetails(partnerId);
+
+                return Accepted(pendingInvestmentDetails);
+            }
+            catch
+            {
+                return BadRequest("unable to get pending investments");
             }
         }
     }
