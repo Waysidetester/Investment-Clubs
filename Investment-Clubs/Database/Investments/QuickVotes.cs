@@ -113,19 +113,18 @@ namespace Investment_Clubs.Database.Investments
                     WHERE p.Id = @PartnerId and pc.ApprovedMember = 1 and i.Pending = 0 and pci.PercentContributed >  0";
                 var parameters = new { PartnerId = partnerId };
 
-                var userInvestments = db.Query<ProfileInvestmentDetails>(querystring, parameters);
+                var partnerInvestments = db.Query<ProfileInvestmentDetails>(querystring, parameters);
 
-                if (userInvestments != null)
+                if (partnerInvestments != null)
                 {
-                    userInvestments.ToList().ForEach(invest => 
+                    partnerInvestments.ToList().ForEach(invest => 
                         invest.PartnerContributed = (invest.PercentContributed * invest.TotalInvestment)
                     );
 
-                    return userInvestments;
+                    return partnerInvestments;
                 }
             }
             throw new Exception("I cannot get the investments this user's made");
         }
-
     }
 }
