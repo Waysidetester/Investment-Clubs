@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Investment_Clubs.Models.Investments
 {
-    public class ProfileInvestmentDetails : IInvestment, IPartnerInvestment
+    public class ProfileInvestmentDetails : IUserInvestment, IPartnerInvestment
     {
         public int PartnerId { get; set; }
         public int ClubId { get; set; }
