@@ -1,6 +1,6 @@
 ﻿namespace Investment_Clubs.Models.Investments
 {
-    public interface IUserInvestment : IUserVotes
+    public interface IInvestment 
     {
         string InvestmentType { get; set; }
         string ReceivingEntity { get; set; }

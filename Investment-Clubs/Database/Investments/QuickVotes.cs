@@ -23,8 +23,8 @@ namespace Investment_Clubs.Database.Investments
                                        FROM Partner as p
 	                                       join PartnerClub as pc on pc.PartnerId = p.Id
 	                                       join PartnerClubInvestment as pci on pci.PartnerClubId = pc.Id
-                                       WHERE p.Id=@UserId and pc.ApprovedMember=1";
-            var parameters = new { UserId = id };
+                                       WHERE p.Id=@PartnerId and pc.ApprovedMember=1";
+            var parameters = new { PartnerId = id };
 
             var pendingInvestments = db.Query<UserVotes>(querystring, parameters);
 
@@ -48,8 +48,8 @@ namespace Investment_Clubs.Database.Investments
 	                                       join Investment as i on i.Id = pci.InvestmentId
 	                                       join Club as c on c.Id = pc.ClubId
 	                                       join InvestmentType as it on it.Id = i.AssetType
-                                       WHERE p.Id=@UserId and i.Pending=1 and pc.ApprovedMember=1";
-                var parameters = new { UserId = partnerId };
+                                       WHERE p.Id=@PartnerId and i.Pending=1 and pc.ApprovedMember=1";
+                var parameters = new { PartnerId = partnerId };
 
                 var pendingInvestments = db.Query<PendingVotes>(querystring, parameters);
 
@@ -94,10 +94,37 @@ namespace Investment_Clubs.Database.Investments
                         return pendingInvestments;
                     }
                 }
-
-
             }
             throw new Exception("trouble getting votes for user");
         }
+
+        internal object GetInvestmentDetailsForUser(int partnerId)
+        {
+            using (SqlConnection db = new SqlConnection(_connectionString))
+            {
+                string querystring = @"	
+                    SELECT p.id PartnerId, pci.PercentContributed, i.Id InvestmentId,
+	                    i.DollarsInvested TotalInvestment, i.ClubId, i.ReceivingEntity, it.InvestmentType
+                    FROM Partner p
+	                    join PartnerClub pc on p.Id = pc.PartnerId
+	                    join PartnerClubInvestment pci on pci.PartnerClubId = pc.id
+	                    join Investment i on i.Id = pci.InvestmentId
+	                    join InvestmentType it on it.Id = i.AssetType
+                    WHERE p.Id = @PartnerId and pc.ApprovedMember = 1 and i.Pending = 0 and pci.PercentContributed >  0";
+                var parameters = new { PartnerId = partnerId };
+
+                var userInvestments = db.Query<ProfileInvestmentDetails>(querystring, parameters);
+
+                if (userInvestments != null)
+                {
+                    var partnerInvestments = userInvestments.Select(invest 
+                            => invest.PartnerContributed = (invest.PercentContributed * invest.TotalInvestment)
+                        );
+                    return partnerInvestments;
+                }
+            }
+            throw new Exception("I cannot get the investments this user's made");
+        }
+
     }
 }

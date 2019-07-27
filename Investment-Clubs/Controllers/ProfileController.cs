@@ -27,13 +27,28 @@ namespace Investment_Clubs.Controllers
         {
             try
             {
-                var x = _clubConnect.GetClubDetailsForUser(partnerId);
+                var partnersClubs = _clubConnect.GetClubDetailsForUser(partnerId);
 
-                return Accepted(x);
+                return Accepted(partnersClubs);
             }
             catch
             {
                 return BadRequest("unable to get user's clubs");
+            }
+        }
+
+        [HttpGet("investment")]
+        public IActionResult GetInvestmentDetailsForUser(int partnerId)
+        {
+            try
+            {
+                var partnersInvestments = _investConnect.GetInvestmentDetailsForUser(partnerId);
+
+                return Accepted(partnersInvestments);
+            }
+            catch
+            {
+                return BadRequest("unable to get investment details");
             }
         }
     }
