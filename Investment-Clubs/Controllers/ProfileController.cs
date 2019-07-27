@@ -53,5 +53,20 @@ namespace Investment_Clubs.Controllers
                 return BadRequest("unable to get investment details");
             }
         }
+
+        [HttpGet("investments/pending")]
+        public IActionResult GetPendingInvestmentsForUser(int partnerId)
+        {
+            try
+            {
+                var pendingInvestmentDetails = _investmentDetail.GetPendingInvestDetails(partnerId);
+
+                return Accepted(pendingInvestmentDetails);
+            }
+            catch
+            {
+                return BadRequest("unable to get pending investments");
+            }
+        }
     }
 }

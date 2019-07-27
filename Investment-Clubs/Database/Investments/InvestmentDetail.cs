@@ -68,7 +68,7 @@ namespace Investment_Clubs.Database.Investments
                     return pendingInvestments;
                 }
             }
-            throw new Exception("I cannot get the investments this user's made");
+            throw new Exception("I cannot get the pending investments for this user");
         }
     }
 }
