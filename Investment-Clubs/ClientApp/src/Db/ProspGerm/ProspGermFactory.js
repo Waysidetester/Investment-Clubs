@@ -39,9 +39,20 @@ const CastUserVote = (decision) => new Promise((Resolve, Reject) => {
     .catch(err => Reject(err))
 });
 
+const GetUsersInvestments = (authedUserId) => new Promise((Resolve, Reject) => {
+  axios.get(`${baseUrl}/api/profile/investments`, {
+    params: {
+      partnerId: authedUserId
+    }
+  })
+  .then(res => Resolve(res))
+  .catch(err => Reject(err))
+});
+
 export default {
   GetClubsForUser,
   GetClubDetailsForUser,
   GetVotesForUser,
   CastUserVote,
+  GetUsersInvestments,
 }

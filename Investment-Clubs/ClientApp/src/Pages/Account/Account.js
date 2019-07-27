@@ -6,12 +6,14 @@ import './Account.scss';
 class Account extends React.Component{
   state={
     clubDetails: null,
+    investmentDetails: null,
   }
 
 
   componentDidMount(){
     this.DbCalls([
       {funct: ProspGerm.GetClubDetailsForUser, stateName: 'clubDetails'},
+      {funct: ProspGerm.GetUsersInvestments, stateName: 'investmentDetails'}
     ]);
   }
 
