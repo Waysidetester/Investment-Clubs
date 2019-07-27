@@ -9,7 +9,17 @@ import './ClubDetailsContainer.scss';
 
 class ClubDetailsContainer extends React.Component{
   ClubDetailGenerator = () => {
-    return this.props.clubDetails.map((club, i) => <ClubDetails key={i} club={club} />);
+    return this.props.clubDetails.map((club, i) => {
+        const investmentsInClub = this.MatchedInvestments(club);
+        return <ClubDetails key={i} club={club} investments={investmentsInClub}/>
+      }
+    );
+  }
+
+  MatchedInvestments = (club) => {
+      return(this.props.investmentDetails.filter(
+        investment => investment.clubId === club.clubId
+      ));
   }
 
   render() {

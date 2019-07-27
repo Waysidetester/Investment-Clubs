@@ -5,8 +5,8 @@ import './Account.scss';
 
 class Account extends React.Component{
   state={
-    clubDetails: null,
-    investmentDetails: null,
+    clubDetails: [],
+    investmentDetails: [],
   }
 
 
@@ -32,7 +32,7 @@ class Account extends React.Component{
     return(
       <div>
         <h2>Account</h2>
-        <ClubDetailsContainer clubDetails={this.state.clubDetails}/>
+        <ClubDetailsContainer clubDetails={this.state.clubDetails} investmentDetails={this.state.investmentDetails} />
       </div>
     );
   }
