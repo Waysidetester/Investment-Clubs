@@ -98,7 +98,7 @@ namespace Investment_Clubs.Database.Investments
             throw new Exception("trouble getting votes for user");
         }
 
-        internal object GetInvestmentDetailsForUser(int partnerId)
+        internal IEnumerable<ProfileInvestmentDetails> GetInvestmentDetailsForUser(int partnerId)
         {
             using (SqlConnection db = new SqlConnection(_connectionString))
             {
@@ -117,10 +117,11 @@ namespace Investment_Clubs.Database.Investments
 
                 if (userInvestments != null)
                 {
-                    var partnerInvestments = userInvestments.Select(invest 
-                            => invest.PartnerContributed = (invest.PercentContributed * invest.TotalInvestment)
-                        );
-                    return partnerInvestments;
+                    userInvestments.ToList().ForEach(invest => 
+                        invest.PartnerContributed = (invest.PercentContributed * invest.TotalInvestment)
+                    );
+
+                    return userInvestments;
                 }
             }
             throw new Exception("I cannot get the investments this user's made");
