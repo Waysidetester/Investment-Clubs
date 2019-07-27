@@ -1,5 +1,6 @@
 import React from 'react';
 import MyInvestments from '../../Investments/MyInvestments/MyInvestments';
+import MyPendingInvestments from '../../Investments/MyPendingInvestments/MyPendingInvestments'
 import './ClubDetails.scss';
 
 class ClubDetails extends React.Component{
@@ -19,6 +20,7 @@ class ClubDetails extends React.Component{
           <p>Access level: {this.props.club.isAdmin ? 'Administrator' : 'Partner'}</p>
         </div>
         <MyInvestments investments={this.props.investments}/>
+        <MyPendingInvestments pendingInv={this.props.pendingInv}/>
       </div>
     );
   }
