@@ -5,7 +5,7 @@ import './MyInvestments.scss';
 class MyInvestments extends React.Component{
 
   DataRowGenerator = () => {
-    this.props.investments.map((investment, index) => this.DataRowShape(investment, index))
+    return this.props.investments.map((investment, index) => (this.DataRowShape(investment, index)));
   }
 
   DataRowShape = (inv, key) => {
@@ -32,11 +32,13 @@ class MyInvestments extends React.Component{
     return(
       <Table responsive>
         <thead>
-          <th>Investment In</th>
-          <th>Percent Contributed as Partner</th>
-          <th>Capital Contributed as Partner</th>
-          <th>Club Investment Amount</th>
-          <th>Security Type</th>
+          <tr>
+            <th>Investment In</th>
+            <th>Percent Contributed as Partner</th>
+            <th>Capital Contributed as Partner</th>
+            <th>Club Investment Amount</th>
+            <th>Security Type</th>
+          </tr>
         </thead>
         <tbody>
           {this.DataRowGenerator()}
