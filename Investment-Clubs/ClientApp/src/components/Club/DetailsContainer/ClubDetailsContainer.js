@@ -10,16 +10,26 @@ import './ClubDetailsContainer.scss';
 class ClubDetailsContainer extends React.Component{
   ClubDetailGenerator = () => {
     return this.props.clubDetails.map((club, i) => {
-        const investmentsInClub = this.MatchedInvestments(club);
-        return <ClubDetails key={i} club={club} investments={investmentsInClub}/>
+        const sortedInvests = this.MatchedInvestments(club);
+        return <ClubDetails 
+                  key={i}
+                  club={club} 
+                  investments={sortedInvests.investmentsInClub}
+                  pendingInv={sortedInvests.pendingInvestInClub}
+                />
       }
     );
   }
 
   MatchedInvestments = (club) => {
-      return(this.props.investmentDetails.filter(
+    return({
+      investmentsInClub: this.props.investmentDetails.filter(
         investment => investment.clubId === club.clubId
-      ));
+      ),
+      pendingInvestInClub: this.props.pendingInvestments.filter(
+        pendInv => pendInv.clubId === club.clubId
+      )
+    });
   }
 
   render() {
