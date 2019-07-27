@@ -37,7 +37,7 @@ namespace Investment_Clubs.Controllers
             }
         }
 
-        [HttpGet("investment")]
+        [HttpGet("investments")]
         public IActionResult GetInvestmentDetailsForUser(int partnerId)
         {
             try
