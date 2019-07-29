@@ -3,8 +3,16 @@ import InvestmentExpanded from '../InvestmentExpanded/InvestmentExpanded';
 import './MyPendingInvestments.scss';
 
 class MyPendingInvestments extends React.Component{
+  SelectVote = (invId) => {
+    if(this.props.votes > 0){
+      let vote = this.props.votes.find(vote => (vote.investmentId === invId.investmentId));
+      debugger;
+      return vote;
+    }
+  }
+  
   DisplayAll = () => {
-    
+  
     // ensures data is present in array
     if(this.props.pendingInv[0] !== undefined){
 
@@ -15,8 +23,18 @@ class MyPendingInvestments extends React.Component{
       keys.splice(keys.indexOf('clubId'),1);
       keys.splice(keys.indexOf('investmentId'),1);
 
+      
+
       // returns component for each investment that's pending
-      return this.props.pendingInv.map(inv => <InvestmentExpanded key={inv.investmentId} inv={inv} keys={keys}/>);
+      return this.props.pendingInv.map(inv => {
+        const vote = this.SelectVote(inv.investmentId)
+        return <InvestmentExpanded
+          key={inv.investmentId}
+          inv={inv}
+          keys={keys}
+          vote={vote}
+        />
+      });
     }
   }
 

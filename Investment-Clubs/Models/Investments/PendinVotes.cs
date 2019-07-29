@@ -9,6 +9,8 @@ namespace Investment_Clubs.Models.Investments
     {
         public int Id { get; set; }
         public int PartnerId { get; set; }
+        public int ClubId { get; set; }
+        public int InvestmentId { get; set; }
         public bool? Vote { get; set; }
         public bool Abstain { get; set; }
         public string ReceivingEntity { get; set; }

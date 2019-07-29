@@ -7,11 +7,11 @@ class InvestmentExpanded extends React.Component{
     // empty array for jsx to be pushed
     let pendInvProps = []
 
-    this.props.keys.forEach(key => {
+    this.props.keys.forEach((key, index) => {
 
       // Checks there is a value in current property and adds to the array if true
       if(this.props.inv[key] !== null){
-        pendInvProps.push(<p>{key}: {this.props.inv[key]}</p>);
+        pendInvProps.push(<p key={index}>{key}: {this.props.inv[key]}</p>);
       }
       
     });

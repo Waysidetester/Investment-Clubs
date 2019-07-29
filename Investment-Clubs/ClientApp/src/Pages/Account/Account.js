@@ -8,6 +8,7 @@ class Account extends React.Component{
     clubDetails: [],
     investmentDetails: [],
     pendingInvestments: [],
+    votes:[],
   }
 
 
@@ -15,7 +16,8 @@ class Account extends React.Component{
     this.DbCalls([
       {funct: ProspGerm.GetClubDetailsForUser, stateName: 'clubDetails'},
       {funct: ProspGerm.GetUsersInvestments, stateName: 'investmentDetails'},
-      {funct: ProspGerm.GetPendingInvestments, stateName: 'pendingInvestments'}
+      {funct: ProspGerm.GetPendingInvestments, stateName: 'pendingInvestments'},
+      {funct: ProspGerm.GetVotesForUser, stateName:'votes'}
     ]);
   }
 
@@ -38,6 +40,7 @@ class Account extends React.Component{
           clubDetails={this.state.clubDetails}
           investmentDetails={this.state.investmentDetails} 
           pendingInvestments={this.state.pendingInvestments}
+          votes={this.state.votes}
         />
       </div>
     );

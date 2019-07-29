@@ -20,7 +20,7 @@ class ClubDetails extends React.Component{
           <p>Access level: {this.props.club.isAdmin ? 'Administrator' : 'Partner'}</p>
         </div>
         <MyInvestments investments={this.props.investments}/>
-        <MyPendingInvestments pendingInv={this.props.pendingInv}/>
+        <MyPendingInvestments pendingInv={this.props.pendingInv} votes={this.props.pendingVotes}/>
       </div>
     );
   }

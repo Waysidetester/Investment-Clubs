@@ -40,15 +40,16 @@ namespace Investment_Clubs.Database.Investments
         {
             using (SqlConnection db = new SqlConnection(_connectionString))
             {
-                string querystring = @"SELECT pci.id, p.id PartnerId, pci.Vote, pci.Abstain,
-                                           i.ReceivingEntity, c.ClubName, it.InvestmentType
-                                       FROM Partner as p
-	                                       join PartnerClub as pc on pc.PartnerId = p.Id
-	                                       join PartnerClubInvestment as pci on pci.PartnerClubId = pc.Id
-	                                       join Investment as i on i.Id = pci.InvestmentId
-	                                       join Club as c on c.Id = pc.ClubId
-	                                       join InvestmentType as it on it.Id = i.AssetType
-                                       WHERE p.Id=@PartnerId and i.Pending=1 and pc.ApprovedMember=1";
+                string querystring = @"
+                                    SELECT pci.id, p.id PartnerId, pci.Vote, pci.Abstain, pc.ClubId,
+                                        i.ReceivingEntity, c.ClubName, it.InvestmentType, i.Id InvestmentId
+                                    FROM Partner as p
+	                                    join PartnerClub as pc on pc.PartnerId = p.Id
+	                                    join PartnerClubInvestment as pci on pci.PartnerClubId = pc.Id
+	                                    join Investment as i on i.Id = pci.InvestmentId
+	                                    join Club as c on c.Id = pc.ClubId
+	                                    join InvestmentType as it on it.Id = i.AssetType
+                                    WHERE p.Id=@PartnerId and i.Pending=1 and pc.ApprovedMember=1";
                 var parameters = new { PartnerId = partnerId };
 
                 var pendingInvestments = db.Query<PendingVotes>(querystring, parameters);
