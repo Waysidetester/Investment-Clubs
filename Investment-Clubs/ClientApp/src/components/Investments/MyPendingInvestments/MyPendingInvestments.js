@@ -4,10 +4,10 @@ import './MyPendingInvestments.scss';
 
 class MyPendingInvestments extends React.Component{
   SelectVote = (invId) => {
-    if(this.props.votes > 0){
-      let vote = this.props.votes.find(vote => (vote.investmentId === invId.investmentId));
+    if(this.props.votes.length > 0){
+      let matchedVote = this.props.votes.find(vote => vote.investmentId === invId.investmentId);
       debugger;
-      return vote;
+      return matchedVote;
     }
   }
   
@@ -28,12 +28,12 @@ class MyPendingInvestments extends React.Component{
       // returns component for each investment that's pending
       return this.props.pendingInv.map(inv => {
         const vote = this.SelectVote(inv.investmentId)
-        return <InvestmentExpanded
+        return (<InvestmentExpanded
           key={inv.investmentId}
           inv={inv}
           keys={keys}
           vote={vote}
-        />
+        />)
       });
     }
   }
