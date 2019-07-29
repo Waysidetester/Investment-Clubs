@@ -1,21 +1,23 @@
 import React from 'react';
+import InvestmentExpanded from '../InvestmentExpanded/InvestmentExpanded';
 import './MyPendingInvestments.scss';
 
 class MyPendingInvestments extends React.Component{
   DisplayAll = () => {
-    keys = Object.keys(this.props.pendingInv);
-    keys.splice(keys.indexOf('clubId'));
-    keys.splice(keys.indexOf('investmentId'));
+    if(this.props.pendingInv[0] !== undefined){
+      let keys = Object.keys(this.props.pendingInv[0]);
+      keys.splice(keys.indexOf('clubId'),1);
+      keys.splice(keys.indexOf('investmentId'),1);
+      console.log('keys', keys);
 
-    keys.forEach(element => {
-      <p
-    });
+      return this.props.pendingInv.map(inv => <InvestmentExpanded key={inv.investmentId} inv={inv} keys={keys}/>);
+    }
   }
 
   render(){
     return(
       <div>
-
+        {this.DisplayAll()}
       </div>
     );
   }
