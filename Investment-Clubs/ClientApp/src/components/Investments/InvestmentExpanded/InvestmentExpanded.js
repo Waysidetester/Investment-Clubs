@@ -3,13 +3,21 @@ import './InvestmentExpanded.scss';
 
 class InvestmentExpanded extends React.Component{
   Expander = () => {
-    let x = []
+    
+    // empty array for jsx to be pushed
+    let pendInvProps = []
+
     this.props.keys.forEach(key => {
+
+      // Checks there is a value in current property and adds to the array if true
       if(this.props.inv[key] !== null){
-        x.push(<p>{key}: {this.props.inv[key]}</p>);
+        pendInvProps.push(<p>{key}: {this.props.inv[key]}</p>);
       }
+      
     });
-    return x;
+
+    // React can render each item of an array that is JSX
+    return pendInvProps;
   }
 
   render(){
