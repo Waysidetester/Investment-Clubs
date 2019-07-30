@@ -3,8 +3,13 @@ import VoteButtons from '../../Votes/VoteButtons/VoteButtons';
 import './InvestmentExpanded.scss';
 
 class InvestmentExpanded extends React.Component{
+  VoteAvailability = () => {
+    if(this.props.vote !== undefined){
+      return<VoteButtons vote={this.props.vote} UpdateVote={this.props.UpdateVote}/>
+    }
+  }
+
   Expander = () => {
-    
     // empty array for jsx to be pushed
     let pendInvProps = []
 
@@ -24,7 +29,7 @@ class InvestmentExpanded extends React.Component{
   render(){
     return(
     <div>
-      <VoteButtons vote={this.props.vote} UpdateVote={this.props.UpdateVote}/>
+      {this.VoteAvailability()}
       {this.Expander()}
     </div>
     );

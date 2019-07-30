@@ -44,7 +44,7 @@ namespace Investment_Clubs.Database.Investments
             }
             throw new Exception("I cannot get the investments this user's made");
         }
-        internal IEnumerable<PendingInvestments> GetPendingInvestDetails(int partnerId)
+        internal IEnumerable<DetailedInvestments> GetPendingInvestDetails(int partnerId)
         {
             using (SqlConnection db = new SqlConnection(_connectionString))
             {
@@ -60,12 +60,38 @@ namespace Investment_Clubs.Database.Investments
                     WHERE p.Id = @PartnerId and pc.ApprovedMember = 1 and i.Pending = 1";
                 var parameters = new { PartnerId = partnerId };
 
-                var pendingInvestments = db.Query<PendingInvestments>(querystring, parameters);
+                var pendingInvestments = db.Query<DetailedInvestments>(querystring, parameters);
 
                 if (pendingInvestments != null)
                 {
                     pendingInvestments.ToList();
                     return pendingInvestments;
+                }
+            }
+            throw new Exception("I cannot get the pending investments for this user");
+        }
+
+        internal IUserInvestment GetFullInvestDetails(int partnerId, int investmentId)
+        {
+            using (SqlConnection db = new SqlConnection(_connectionString))
+            {
+                string querystring = @"	
+                    SELECT i.Id InvestmentId, it.InvestmentType, i.ClubId, i.OwnershipUnits,
+	                     i.DollarsInvested, i.ReceivingEntity, i.DebtCoupon, i.MatureDate,
+	                     i.ContractPrice, i.PercentEquity, i.InvestDate, i.DivestDate, i.Convertable 
+                    FROM Partner p
+	                    join PartnerClub pc on p.Id = pc.PartnerId
+	                    join PartnerClubInvestment pci on pci.PartnerClubId = pc.id
+	                    join Investment i on i.Id = pci.InvestmentId
+	                    join InvestmentType it on it.Id = i.AssetType
+                    WHERE p.Id = @PartnerId and pc.ApprovedMember = 1 and i.Id = @InvestmentId";
+                var parameters = new { PartnerId = partnerId, InvestmentId = investmentId };
+
+                var InvestDetail = db.QueryFirstOrDefault<DetailedInvestments>(querystring, parameters);
+
+                if (InvestDetail != null)
+                {
+                    return InvestDetail;
                 }
             }
             throw new Exception("I cannot get the pending investments for this user");
