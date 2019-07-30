@@ -7,6 +7,7 @@ import {
 import MyNav from '../SiteWide/MyNav/MyNav';
 import Home from '../Pages/Home/Home';
 import Account from '../Pages/Account/Account';
+import Club from '../Pages/Club/Club';
 import Disclaimer from '../SiteWide/Disclaimer/Disclaimer';
 import './App.scss';
 
@@ -30,6 +31,7 @@ export default class App extends React.Component{
                   <Route path='/' exact render={() => <Home currentUser={currentUser} />} />
                   <Route path='/home' render={() => <Home currentUser={currentUser} />} />
                   <Route path='/account' render={() => <Account currentUser={currentUser} />} />
+                  <Route path='/club' render={() => <Club currentUser={currentUser} />} />
                 </Switch>
               </div>
             </React.Fragment>

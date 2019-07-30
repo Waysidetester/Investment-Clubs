@@ -30,7 +30,7 @@ class MyNav extends React.Component{
               <NavLink href="/account">Your Profile</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="https://github.com/reactstrap/reactstrap">Club Page</NavLink>
+              <NavLink href="/club">Clubs</NavLink>
             </NavItem>
             <NavItem>
               <NavLink href="https://github.com/reactstrap/reactstrap">Investment Page</NavLink>
