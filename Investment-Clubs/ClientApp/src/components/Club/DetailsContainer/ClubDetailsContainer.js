@@ -17,6 +17,7 @@ class ClubDetailsContainer extends React.Component{
                   investments={sortedInvests.investmentsInClub}
                   pendingInv={sortedInvests.pendingInvestInClub}
                   pendingVotes={sortedInvests.pendingVotesInClub}
+                  UpdateVote={this.props.UpdateVote}
                 />
       }
     );

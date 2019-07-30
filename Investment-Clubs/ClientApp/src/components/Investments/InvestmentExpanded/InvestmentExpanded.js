@@ -1,4 +1,5 @@
 import React from 'react';
+import VoteButtons from '../../Votes/VoteButtons/VoteButtons';
 import './InvestmentExpanded.scss';
 
 class InvestmentExpanded extends React.Component{
@@ -23,6 +24,7 @@ class InvestmentExpanded extends React.Component{
   render(){
     return(
     <div>
+      <VoteButtons vote={this.props.vote} UpdateVote={this.props.UpdateVote}/>
       {this.Expander()}
     </div>
     );

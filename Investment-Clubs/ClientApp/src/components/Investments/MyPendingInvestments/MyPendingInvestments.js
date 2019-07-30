@@ -3,16 +3,16 @@ import InvestmentExpanded from '../InvestmentExpanded/InvestmentExpanded';
 import './MyPendingInvestments.scss';
 
 class MyPendingInvestments extends React.Component{
+
+  // places votes on the correct pending investments
   SelectVote = (invId) => {
     if(this.props.votes.length > 0){
-      let matchedVote = this.props.votes.find(vote => vote.investmentId === invId.investmentId);
-      debugger;
+      let matchedVote = this.props.votes.find(vote => vote.investmentId === invId);
       return matchedVote;
     }
   }
   
   DisplayAll = () => {
-  
     // ensures data is present in array
     if(this.props.pendingInv[0] !== undefined){
 
@@ -33,6 +33,7 @@ class MyPendingInvestments extends React.Component{
           inv={inv}
           keys={keys}
           vote={vote}
+          UpdateVote={this.props.UpdateVote}
         />)
       });
     }
