@@ -32,7 +32,7 @@ class MyInvestments extends React.Component{
     }
 
     return(
-      <Table responsive>
+      <Table responsive hover>
         <thead>
           <tr>
             <th>Investment In</th>
