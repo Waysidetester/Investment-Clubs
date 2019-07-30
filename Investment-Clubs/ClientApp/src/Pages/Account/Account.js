@@ -8,6 +8,7 @@ class Account extends React.Component{
     clubDetails: [],
     investmentDetails: [],
     pendingInvestments: [],
+    votes:[],
   }
 
 
@@ -15,7 +16,8 @@ class Account extends React.Component{
     this.DbCalls([
       {funct: ProspGerm.GetClubDetailsForUser, stateName: 'clubDetails'},
       {funct: ProspGerm.GetUsersInvestments, stateName: 'investmentDetails'},
-      {funct: ProspGerm.GetPendingInvestments, stateName: 'pendingInvestments'}
+      {funct: ProspGerm.GetPendingInvestments, stateName: 'pendingInvestments'},
+      {funct: ProspGerm.GetVotesForUser, stateName:'votes'}
     ]);
   }
 
@@ -30,6 +32,28 @@ class Account extends React.Component{
     });
   }
 
+  UpdateVote = (decision) => {
+    ProspGerm.CastUserVote(decision)
+      .then(res => {
+        this.MutateVotesObject(res.data);
+      })
+      .catch(err => console.error(err));
+  }
+
+  /* 
+    copies state and changes the vote based
+    on what the database returns
+  */
+  MutateVotesObject = (asyncResults) => {
+    const voteStateCopy = [...this.state.votes];
+    const voteIndex = voteStateCopy.findIndex(vote => vote.id === asyncResults.id)
+
+    voteStateCopy[voteIndex].vote = asyncResults.vote;
+    voteStateCopy[voteIndex].abstain = asyncResults.abstain; 
+    this.setState({votes: voteStateCopy});
+  }
+
+
   render() {
     return(
       <div>
@@ -38,6 +62,8 @@ class Account extends React.Component{
           clubDetails={this.state.clubDetails}
           investmentDetails={this.state.investmentDetails} 
           pendingInvestments={this.state.pendingInvestments}
+          votes={this.state.votes}
+          UpdateVote={this.UpdateVote}
         />
       </div>
     );

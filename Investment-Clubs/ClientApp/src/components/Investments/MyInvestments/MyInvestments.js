@@ -2,12 +2,14 @@ import React from 'react';
 import { Table } from 'reactstrap';
 import './MyInvestments.scss';
 
+// returns non-pending investment information
 class MyInvestments extends React.Component{
 
   DataRowGenerator = () => {
     return this.props.investments.map((investment, index) => (this.DataRowShape(investment, index)));
   }
 
+  // prints a row of relevant investment data
   DataRowShape = (inv, key) => {
     return (
       <tr key={key}>

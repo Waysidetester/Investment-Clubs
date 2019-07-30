@@ -16,6 +16,8 @@ class ClubDetailsContainer extends React.Component{
                   club={club} 
                   investments={sortedInvests.investmentsInClub}
                   pendingInv={sortedInvests.pendingInvestInClub}
+                  pendingVotes={sortedInvests.pendingVotesInClub}
+                  UpdateVote={this.props.UpdateVote}
                 />
       }
     );
@@ -28,6 +30,9 @@ class ClubDetailsContainer extends React.Component{
       ),
       pendingInvestInClub: this.props.pendingInvestments.filter(
         pendInv => pendInv.clubId === club.clubId
+      ),
+      pendingVotesInClub: this.props.votes.filter(
+        pendVote => pendVote.clubId === club.clubId
       )
     });
   }
