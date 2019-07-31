@@ -29,7 +29,7 @@ class MyNav extends React.Component{
   
       for(let i=0; i<this.props.clubIds.length; i++){
         x.push(
-          <DropdownItem href={`/club/?partnerId=${this.props.currentUser}&clubId=${this.props.clubIds[i]}`}>
+          <DropdownItem key={i} href={`/club/?partnerId=${this.props.currentUser}&clubId=${this.props.clubIds[i]}`}>
             Club {(i+1)}
           </DropdownItem>
         )
@@ -59,9 +59,7 @@ class MyNav extends React.Component{
             <NavItem>
               <NavLink href="/account">Your Profile</NavLink>
             </NavItem>
-            <NavItem>
               {this.ClubSetter()}
-            </NavItem>
             <NavItem>
               <NavLink href="https://github.com/reactstrap/reactstrap">Investment Page</NavLink>
             </NavItem>

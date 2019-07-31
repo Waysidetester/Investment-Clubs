@@ -70,13 +70,8 @@ const GetInvestmentDetails = (authedUserId, investmentId) => new Promise((Resolv
   .catch(err => Reject(err))
 });
 
-const DetailsForClub = (authedUserId, clubId) => new Promise((Resolve, Reject) => {
-  axios.get(`${baseUrl}/api/profile/investments/detail`, {
-    params: {
-      partnerId: authedUserId,
-      investmentId: clubId
-    }
-  })
+const DetailsForClub = (query) => new Promise((Resolve, Reject) => {
+  axios.get(`${baseUrl}/api/club${query}`)
   .then(res => Resolve(res))
   .catch(err => Reject(err))
 });

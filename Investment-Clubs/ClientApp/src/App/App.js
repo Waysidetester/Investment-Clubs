@@ -39,7 +39,7 @@ class App extends React.Component{
         <div>
           <BrowserRouter>
             <React.Fragment>
-              <MyNav clubIds={this.state.clubIds} currentUser={this.state.currentUser}/>
+              <MyNav clubIds={this.state.clubIds} currentUser={currentUser}/>
               <Disclaimer />
               <div className='container'>
                 <Switch>

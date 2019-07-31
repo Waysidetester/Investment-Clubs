@@ -13,7 +13,11 @@ class Club extends React.Component{
     this.DbCalls([
       {funct: ProspGerm.GetVotesForUser, stateName:'votes'},
     ]);
-    ProspGerm.DetailsForClub(this.props.currentUser, )
+    ProspGerm.DetailsForClub(this.props.location.search)
+      .then(res => {
+        this.setState({club: res.data});
+      })
+      .catch(err => console.error(err));
   }
 
   DbCalls = (asyncCalls) => {
