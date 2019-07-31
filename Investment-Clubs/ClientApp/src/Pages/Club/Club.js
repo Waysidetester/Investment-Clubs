@@ -1,4 +1,5 @@
 import React from 'react';
+import { Jumbotron } from 'reactstrap';
 import ProspGerm from '../../Db/ProspGerm/ProspGermFactory';
 import './Club.scss';
 
@@ -54,9 +55,23 @@ class Club extends React.Component{
 
 
   render(){
-    return(
-      <h1>This is the club page</h1>
-    );
+    if(this.state.club !== null){
+      return(
+        <div>
+          <Jumbotron>
+            <h1 className="display-3">{this.state.club.clubName}</h1>
+            <h3>Investable Capital --- {this.state.club.clubInvestable.toLocaleString('en-US', {style: 'currency', currency:'USD'})}</h3>
+            <h3>Invested Capital --- {this.state.club.dollarsInvested.toLocaleString('en-US', {style: 'currency', currency:'USD'})}</h3>
+            <hr className="my-2" />
+            <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+          </Jumbotron>
+        </div>
+      );
+    }
+        return(
+          <h1>This is the club page</h1>
+        );
+
   }
 }
 
