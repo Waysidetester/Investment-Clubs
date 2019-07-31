@@ -70,6 +70,27 @@ const GetInvestmentDetails = (authedUserId, investmentId) => new Promise((Resolv
   .catch(err => Reject(err))
 });
 
+const DetailsForClub = (authedUserId, clubId) => new Promise((Resolve, Reject) => {
+  axios.get(`${baseUrl}/api/profile/investments/detail`, {
+    params: {
+      partnerId: authedUserId,
+      investmentId: clubId
+    }
+  })
+  .then(res => Resolve(res))
+  .catch(err => Reject(err))
+});
+
+const ClubIds = (authedUserId) => new Promise((Resolve, Reject) => {
+  axios.get(`${baseUrl}/api/home`, {
+    params: {
+      partnerId: authedUserId,
+    }
+  })
+  .then(res => Resolve(res))
+  .catch(err => Reject(err))
+});
+
 export default {
   GetClubsForUser,
   GetClubDetailsForUser,
@@ -78,4 +99,6 @@ export default {
   GetUsersInvestments,
   GetPendingInvestments,
   GetInvestmentDetails,
+  DetailsForClub,
+  ClubIds
 }

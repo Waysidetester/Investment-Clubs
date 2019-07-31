@@ -62,5 +62,20 @@ namespace Investment_Clubs.Controllers
                 return BadRequest();
             }
         }
+
+        [HttpGet]
+        public IActionResult ClubIds(int partnerId)
+        {
+            try
+            {
+                var clubIds = _clubConnect.UsersClubIds(partnerId);
+
+                return Accepted(clubIds);
+            }
+            catch
+            {
+                return BadRequest("Trouble getting Club Id's for user");
+            }
+        }
     }
 }

@@ -74,5 +74,29 @@ namespace Investment_Clubs.Database.Clubs
             }
             throw new Exception("User is not involved with any clubs");
         }
+
+        internal IEnumerable<int> UsersClubIds(int partnerId)
+        {
+            using (SqlConnection db = new SqlConnection(_connectionString))
+            {
+                string selectQuery = @"
+                        SELECT c.Id ClubId
+                        FROM Club c
+	                        join PartnerClub pc on pc.ClubId = c.Id
+	                        join Partner p on p.Id = pc.PartnerId
+                        WHERE p.Id = 1";
+                var parameters = new { PartnerId = partnerId };
+
+                var clubIds = db.Query<int>(selectQuery, parameters);
+
+                // Ensures there is a return value or throws an exception
+                if (clubIds != null)
+                {
+                    return clubIds;
+                }
+            }
+            throw new Exception("User is not involved with any clubs");
+        }
+
     }
 }
