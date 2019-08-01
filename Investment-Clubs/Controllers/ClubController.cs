@@ -33,5 +33,20 @@ namespace Investment_Clubs.Controllers
                 return BadRequest("unable to get club page info");
             }
         }
+
+        [HttpGet("partners")]
+        public IActionResult ClubMembers(int partnerId, int clubId)
+        {
+            try
+            {
+                var ClubInfo = _clubBaseConnect.GetClubPartners(partnerId, clubId);
+
+                return Accepted(ClubInfo);
+            }
+            catch
+            {
+                return BadRequest("unable to get club partners");
+            }
+        }
     }
 }
