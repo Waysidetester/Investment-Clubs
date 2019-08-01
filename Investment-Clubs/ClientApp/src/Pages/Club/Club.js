@@ -60,10 +60,13 @@ class Club extends React.Component{
         <div>
           <Jumbotron>
             <h1 className="display-3">{this.state.club.clubName}</h1>
-            <h3>Investable Capital --- {this.state.club.clubInvestable.toLocaleString('en-US', {style: 'currency', currency:'USD'})}</h3>
-            <h3>Invested Capital --- {this.state.club.dollarsInvested.toLocaleString('en-US', {style: 'currency', currency:'USD'})}</h3>
+            <h3>Investable --- {this.state.club.clubInvestable.toLocaleString('en-US', {style: 'currency', currency:'USD'})}</h3>
+            <h3>Invested --- {this.state.club.dollarsInvested.toLocaleString('en-US', {style: 'currency', currency:'USD'})}</h3>
             <hr className="my-2" />
-            <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+            <p>Club members: {this.state.club.partnerCount}</p>
+            <p>Accredited members: {this.state.club.accreditedPartnerCount}</p>
+            <p>{this.state.club.selfDirected}</p>
+            <p>Club Type: {this.state.club.selfDirected ? 'Self-Directed' : 'Club-Directed'}</p>
           </Jumbotron>
         </div>
       );
