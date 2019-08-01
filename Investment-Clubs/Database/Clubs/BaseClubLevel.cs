@@ -49,8 +49,11 @@ namespace Investment_Clubs.Database.Clubs
             using (SqlConnection db = new SqlConnection(_connectionString))
             {
                 string selectQuery = @"
-                              SELECT *
-                              FROM PartnerClub
+                              SELECT pc.PartnerId, p.FirstName, p.LastName, 
+                                pc.DateJoined, pc.Contributing, pc.Investable, 
+                                pc.IsAdmin
+                              FROM PartnerClub pc
+                            	join Partner p on p.Id = pc.PartnerId
                               WHERE ClubId=@ClubId and ApprovedMember = 1
 	                            and NOT PartnerId=@PartnerId";
                 var parameters = new { PartnerId = partnerId, ClubId = clubId };

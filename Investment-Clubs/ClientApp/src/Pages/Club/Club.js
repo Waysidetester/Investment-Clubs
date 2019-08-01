@@ -1,4 +1,5 @@
 import React from 'react';
+import PartnerList from '../../components/Partners/Basic/PartnerList';
 import { Jumbotron } from 'reactstrap';
 import ProspGerm from '../../Db/ProspGerm/ProspGermFactory';
 import './Club.scss';
@@ -75,6 +76,7 @@ class Club extends React.Component{
             <p>{this.state.club.selfDirected}</p>
             <p>Club Type: {this.state.club.selfDirected ? 'Self-Directed' : 'Club-Directed'}</p>
           </Jumbotron>
+          <PartnerList partners={this.state.partners} />
         </div>
       );
     }
