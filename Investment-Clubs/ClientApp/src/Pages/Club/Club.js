@@ -8,6 +8,7 @@ class Club extends React.Component{
     club: null,
     votes: null,
     userInvs: null,
+    partners: null
   }
 
   componentDidMount(){
@@ -17,6 +18,12 @@ class Club extends React.Component{
     ProspGerm.DetailsForClub(this.props.location.search)
       .then(res => {
         this.setState({club: res.data});
+      })
+      .catch(err => console.error(err));
+
+    ProspGerm.ClubPartners(this.props.location.search)
+      .then(res => {
+        this.setState({partners: res.data});
       })
       .catch(err => console.error(err));
   }

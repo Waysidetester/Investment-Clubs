@@ -76,6 +76,13 @@ const DetailsForClub = (query) => new Promise((Resolve, Reject) => {
   .catch(err => Reject(err))
 });
 
+const ClubPartners = (query) => new Promise((Resolve, Reject) => {
+  axios.get(`${baseUrl}/api/club/partners${query}`)
+  .then(res => Resolve(res))
+  .catch(err => Reject(err))
+});
+
+
 const ClubIds = (authedUserId) => new Promise((Resolve, Reject) => {
   axios.get(`${baseUrl}/api/home`, {
     params: {
@@ -95,5 +102,6 @@ export default {
   GetPendingInvestments,
   GetInvestmentDetails,
   DetailsForClub,
-  ClubIds
+  ClubIds,
+  ClubPartners
 }
