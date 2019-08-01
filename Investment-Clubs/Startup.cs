@@ -32,6 +32,7 @@ namespace Investment_Clubs
             services.AddTransient<UserLevel>();
             services.AddTransient<QuickVotes>();
             services.AddTransient<InvestmentDetail>();
+            services.AddTransient<BaseClubLevel>();
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
