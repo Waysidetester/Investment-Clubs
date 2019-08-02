@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Investment_Clubs.Database.Clubs;
+using Investment_Clubs.Database.Investments;
 
 
 namespace Investment_Clubs.Controllers
@@ -14,9 +15,11 @@ namespace Investment_Clubs.Controllers
     public class ClubController : ControllerBase
     {
         readonly BaseClubLevel _clubBaseConnect;
-        public ClubController(BaseClubLevel clubBaseConnect)
+        readonly InvestmentDetail _invDetailConnect;
+        public ClubController(BaseClubLevel clubBaseConnect, InvestmentDetail invDetailConnect)
         {
             _clubBaseConnect = clubBaseConnect;
+            _invDetailConnect = invDetailConnect;
         }
 
         [HttpGet]
@@ -46,6 +49,22 @@ namespace Investment_Clubs.Controllers
             catch
             {
                 return BadRequest("unable to get club partners");
+            }
+        }
+
+
+        [HttpGet("investments")]
+        public IActionResult ClubInvestments(int partnerId, int clubId)
+        {
+            try
+            {
+                var ClubInfo = _invDetailConnect.GetClubInvestDetails(clubId);
+
+                return Accepted(ClubInfo);
+            }
+            catch
+            {
+                return BadRequest("unable to get club investments");
             }
         }
     }

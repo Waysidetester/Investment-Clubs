@@ -1,13 +1,12 @@
 import React from 'react';
 import './PartnerList.scss';
-import { all } from 'q';
 
 class PartnerList extends React.Component{
 
   Partners = () => {
     let allPartners = []
     for(let i = 0; i < this.props.partners.length; i++){
-      allPartners.push(<li>{this.props.partners[i].firstName} {this.props.partners[i].lastName}</li>)
+      allPartners.push(<li key={i}>{this.props.partners[i].firstName} {this.props.partners[i].lastName}</li>)
     }
     return allPartners;
   }
