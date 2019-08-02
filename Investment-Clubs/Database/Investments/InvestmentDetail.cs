@@ -16,7 +16,9 @@ namespace Investment_Clubs.Database.Investments
         {
             _connectionString = dbConfig.Value.ConnectionString;
         }
-        internal IEnumerable<ProfileInvestmentDetails> GetInvestmentDetailsForUser(int partnerId)
+
+        // User details on investment
+        internal IEnumerable<IPartnerInvestment> GetInvestmentDetailsForUser(int partnerId)
         {
             using (SqlConnection db = new SqlConnection(_connectionString))
             {
@@ -44,6 +46,8 @@ namespace Investment_Clubs.Database.Investments
             }
             throw new Exception("I cannot get the investments this user's made");
         }
+
+        //Details when pending
         internal IEnumerable<DetailedInvestments> GetPendingInvestDetails(int partnerId)
         {
             using (SqlConnection db = new SqlConnection(_connectionString))
@@ -71,6 +75,7 @@ namespace Investment_Clubs.Database.Investments
             throw new Exception("I cannot get the pending investments for this user");
         }
 
+        // Details per investment
         internal IUserInvestment GetFullInvestDetails(int partnerId, int investmentId)
         {
             using (SqlConnection db = new SqlConnection(_connectionString))
@@ -88,6 +93,31 @@ namespace Investment_Clubs.Database.Investments
                 var parameters = new { PartnerId = partnerId, InvestmentId = investmentId };
 
                 var InvestDetail = db.QueryFirstOrDefault<DetailedInvestments>(querystring, parameters);
+
+                if (InvestDetail != null)
+                {
+                    return InvestDetail;
+                }
+            }
+            throw new Exception("I cannot get the pending investments for this user");
+        }
+
+        internal IEnumerable<IUserInvestment> GetClubInvestDetails(int clubId)
+        {
+            using (SqlConnection db = new SqlConnection(_connectionString))
+            {
+                string querystring = @"	
+                    SELECT i.Id InvestmentId, it.InvestmentType, i.ClubId, i.OwnershipUnits,
+	                     i.DollarsInvested, i.ReceivingEntity, i.DebtCoupon, i.MatureDate,
+	                     i.ContractPrice, i.PercentEquity, i.InvestDate, i.DivestDate, 
+						 i.Convertable, i.Pending, i.Invested
+                    FROM Club c
+	                    join Investment i on i.ClubId = c.Id
+	                    join InvestmentType it on it.Id = i.AssetType
+                    WHERE c.Id = @ClubId";
+                var parameters = new { ClubId = clubId };
+
+                var InvestDetail = db.Query<ClubInvestments>(querystring, parameters);
 
                 if (InvestDetail != null)
                 {

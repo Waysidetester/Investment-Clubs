@@ -1,5 +1,6 @@
 import React from 'react';
 import PartnerList from '../../components/Partners/Basic/PartnerList';
+import ClubInvestments from '../../components/Investments/ClubInvestment/ClubInvestments';
 import { Jumbotron } from 'reactstrap';
 import ProspGerm from '../../Db/ProspGerm/ProspGermFactory';
 import './Club.scss';
@@ -8,7 +9,7 @@ class Club extends React.Component{
   state={
     club: null,
     votes: null,
-    userInvs: null,
+    clubInvs: [],
     partners: null
   }
 
@@ -25,6 +26,12 @@ class Club extends React.Component{
     ProspGerm.ClubPartners(this.props.location.search)
       .then(res => {
         this.setState({partners: res.data});
+      })
+      .catch(err => console.error(err));
+    
+    ProspGerm.ClubInvestments(this.props.location.search)
+      .then(res => {
+        this.setState({clubInvs: res.data});
       })
       .catch(err => console.error(err));
   }
@@ -77,6 +84,7 @@ class Club extends React.Component{
             <p>Club Type: {this.state.club.selfDirected ? 'Self-Directed' : 'Club-Directed'}</p>
           </Jumbotron>
           <PartnerList partners={this.state.partners} />
+          <ClubInvestments clubInvs={this.state.clubInvs}/>
         </div>
       );
     }
