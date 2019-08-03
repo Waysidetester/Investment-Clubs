@@ -1,5 +1,5 @@
 import React from 'react';
-import AssetSpecifGen from './AssetSpecificGenerator';
+import AssetSpecifGen from './AssetType/AssetSpecificGenerator';
 import {
   Form,
   Label,
@@ -50,11 +50,11 @@ class Proposal extends React.Component{
           </FormGroup>
           <FormGroup>
             <Label for="receivingEntity">Issuing Holder's Name/Doing Business As</Label>
-            <Input type="text" name="receivingEntity" id="receivingEntity" onChange={this.handleSubmit}/>
+            <Input type="text" name="receivingEntity" id="receivingEntity" onChange={this.handleChange}/>
           </FormGroup>
           <FormGroup>
             <Label for="dollarsInvested">Proposed Amount</Label>
-            <Input type="text" name="dollarsInvested" id="dollarsInvested" onChange={this.handleSubmit}/>
+            <Input type="text" name="dollarsInvested" id="dollarsInvested" onChange={this.handleChange}/>
           </FormGroup>
           {AssetSpecifGen(this.state.assetType, this.handleChange)}
           <Button onClick={this.handleSubmit}>Submit</Button>
