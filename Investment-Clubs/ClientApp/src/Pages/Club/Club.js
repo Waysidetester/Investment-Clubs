@@ -10,7 +10,8 @@ class Club extends React.Component{
     club: null,
     votes: null,
     clubInvs: [],
-    partners: null
+    partners: null,
+    clubROI: null
   }
 
   componentDidMount(){
@@ -20,6 +21,11 @@ class Club extends React.Component{
     ProspGerm.DetailsForClub(this.props.location.search)
       .then(res => {
         this.setState({club: res.data});
+        ProspGerm.ClubROI(res.data.clubId)
+        .then(result => {
+          this.setState({clubROI: result.data});
+        })
+        .catch(err => console.error(err));  
       })
       .catch(err => console.error(err));
 
@@ -82,6 +88,7 @@ class Club extends React.Component{
             <p>Accredited members: {this.state.club.accreditedPartnerCount}</p>
             <p>{this.state.club.selfDirected}</p>
             <p>Club Type: {this.state.club.selfDirected ? 'Self-Directed' : 'Club-Directed'}</p>
+            <p>{this.state.clubROI === null ? '' : `Current ROI: $${this.state.clubROI}`}</p>
           </Jumbotron>
           <PartnerList partners={this.state.partners} />
           <ClubInvestments clubInvs={this.state.clubInvs}/>

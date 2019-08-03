@@ -127,12 +127,12 @@ namespace Investment_Clubs.Database.Investments
             throw new Exception("I cannot get the pending investments for this user");
         }
 
-        internal ClubROI ClubROI(int clubId)
+        internal decimal ClubROI(int clubId)
         {
             using (SqlConnection db = new SqlConnection(_connectionString))
             {
                 string querystring = @"	
-                    SELECT SUM(Performance.InvPerform)CROI, ClubId
+                    SELECT SUM(Performance.InvPerform)CROI
                     FROM (
 	                    SELECT (DollarsDivested - DollarsInvested) InvPerform, ClubId
 	                    FROM Investment
@@ -140,7 +140,7 @@ namespace Investment_Clubs.Database.Investments
                     GROUP BY ClubId";
                 var parameters = new { ClubId = clubId };
 
-                var InvestDetail = db.QueryFirstOrDefault<ClubROI>(querystring, parameters);
+                var InvestDetail = db.QueryFirstOrDefault<decimal>(querystring, parameters);
 
                 if (InvestDetail != null)
                 {

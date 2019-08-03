@@ -99,6 +99,17 @@ const ClubIds = (authedUserId) => new Promise((Resolve, Reject) => {
   .catch(err => Reject(err))
 });
 
+const ClubROI = (ClubId) => new Promise((Resolve, Reject) => {
+  axios.get(`${baseUrl}/api/club/croi`, {
+    params: {
+      clubId: ClubId,
+    }
+  })
+  .then(res => Resolve(res))
+  .catch(err => Reject(err))
+});
+
+
 export default {
   GetClubsForUser,
   GetClubDetailsForUser,
@@ -110,5 +121,6 @@ export default {
   DetailsForClub,
   ClubIds,
   ClubPartners,
-  ClubInvestments
+  ClubInvestments,
+  ClubROI,
 }
