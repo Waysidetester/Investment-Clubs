@@ -126,6 +126,30 @@ namespace Investment_Clubs.Database.Investments
             }
             throw new Exception("I cannot get the pending investments for this user");
         }
+
+        internal ClubROI ClubROI(int clubId)
+        {
+            using (SqlConnection db = new SqlConnection(_connectionString))
+            {
+                string querystring = @"	
+                    SELECT SUM(Performance.InvPerform)CROI, ClubId
+                    FROM (
+	                    SELECT (DollarsDivested - DollarsInvested) InvPerform, ClubId
+	                    FROM Investment
+	                    WHERE ClubId = @ClubId) as Performance
+                    GROUP BY ClubId";
+                var parameters = new { ClubId = clubId };
+
+                var InvestDetail = db.QueryFirstOrDefault<ClubROI>(querystring, parameters);
+
+                if (InvestDetail != null)
+                {
+                    return InvestDetail;
+                }
+            }
+            throw new Exception("I cannot get the pending investments for this user");
+        }
+
     }
 }
 
