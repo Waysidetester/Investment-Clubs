@@ -1,4 +1,5 @@
 import React from 'react';
+import Proposal from '../../components/Forms/Investments/Proposal';
 import './NewInvestment.scss';
 
 class NewInvestment extends React.Component{
@@ -6,6 +7,7 @@ class NewInvestment extends React.Component{
     return(
       <div>
         <h1>New Investment Page</h1>
+        <Proposal />
       </div>
     );
   }
