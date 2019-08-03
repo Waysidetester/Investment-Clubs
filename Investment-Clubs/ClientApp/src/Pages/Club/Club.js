@@ -18,6 +18,7 @@ class Club extends React.Component{
     this.DbCalls([
       {funct: ProspGerm.GetVotesForUser, stateName:'votes'},
     ]);
+
     ProspGerm.DetailsForClub(this.props.location.search)
       .then(res => {
         this.setState({club: res.data});
@@ -27,19 +28,29 @@ class Club extends React.Component{
         })
         .catch(err => console.error(err));  
       })
-      .catch(err => console.error(err));
+      .catch(err => console.error(err)
+    );
+
+    ProspGerm.PartnersClubROI(this.props.location.search)
+      .then(res => {
+        this.setState({partnerROI: res.data});
+      })
+      .catch(err => console.error(err)
+    );
 
     ProspGerm.ClubPartners(this.props.location.search)
       .then(res => {
         this.setState({partners: res.data});
       })
-      .catch(err => console.error(err));
+      .catch(err => console.error(err)
+    );
     
     ProspGerm.ClubInvestments(this.props.location.search)
       .then(res => {
         this.setState({clubInvs: res.data});
       })
-      .catch(err => console.error(err));
+      .catch(err => console.error(err)
+    );
   }
 
   DbCalls = (asyncCalls) => {
@@ -88,7 +99,8 @@ class Club extends React.Component{
             <p>Accredited members: {this.state.club.accreditedPartnerCount}</p>
             <p>{this.state.club.selfDirected}</p>
             <p>Club Type: {this.state.club.selfDirected ? 'Self-Directed' : 'Club-Directed'}</p>
-            <p>{this.state.clubROI === null ? '' : `Current ROI: $${this.state.clubROI}`}</p>
+            <p>{this.state.clubROI === null ? '' : `Current Club ROI: $${this.state.clubROI}`}</p>
+            <p>{this.state.partnerROI === null ? '' : `Your ROI in ${this.state.club.clubName}: $${this.state.partnerROI}`}</p>
           </Jumbotron>
           <PartnerList partners={this.state.partners} />
           <ClubInvestments clubInvs={this.state.clubInvs}/>

@@ -79,9 +79,24 @@ namespace Investment_Clubs.Controllers
             }
             catch
             {
-                return BadRequest("unable to get club investments");
+                return BadRequest("unable to get club ROI");
             }
-
         }
+
+        [HttpGet("PROI")]
+        public IActionResult PartnerClubReturnOnInv(int partnerId,int clubId)
+        {
+            try
+            {
+                var ClubInfo = _invDetailConnect.PartnersClubROI(partnerId, clubId);
+
+                return Accepted(ClubInfo);
+            }
+            catch
+            {
+                return BadRequest("unable to get partner's club ROI");
+            }
+        }
+
     }
 }
