@@ -29,7 +29,19 @@ class EquityGen extends React.Component {
       <React.Fragment>
         <FormGroup>
           <Label for="ownershipUnits">Shares</Label>
-          <Input type="text" name="ownershipUnits" id="ownershipUnits" />
+          <Input type="text" name="ownershipUnits" id="ownershipUnits" onChange={this.props.handleChange}/>
+        </FormGroup>
+        <FormGroup>
+          <Label for="percentEquity">% Equity</Label>
+          <Input type="text" name="percentEquity" id="percentEquity" onChange={this.props.handleChange}/>
+        </FormGroup>
+        <FormGroup>
+          <Label for="fairMarkitValue">Fair Market Value</Label>
+          <Input type="text" name="fairMarkitValue" id="fairMarkitValue" onChange={this.props.handleChange}/>
+        </FormGroup>
+        <FormGroup>
+          <Label for="valuation">Valuation</Label>
+          <Input type="text" name="valuation" id="valuation" disabled/>
         </FormGroup>
 
         <p>equity</p>
@@ -44,15 +56,15 @@ class DebtGen extends React.Component {
       <React.Fragment>
         <FormGroup>
           <Label for="ownershipUnits">Bonds/Bills</Label>
-          <Input type="text" name="ownershipUnits" id="ownershipUnits" />
+          <Input type="text" name="ownershipUnits" id="ownershipUnits" onChange={this.props.handleChange}/>
         </FormGroup>
         <FormGroup>
           <Label for="debtCoupon">Coupon</Label>
-          <Input type="text" name="debtCoupon" id="debtCoupon" />
+          <Input type="text" name="debtCoupon" id="debtCoupon" onChange={this.props.handleChange}/>
         </FormGroup>
         <FormGroup>
           <Label for="matureDate">Mature Date</Label>
-          <Input type="text" name="matureDate" id="matureDate" />
+          <Input type="text" name="matureDate" id="matureDate" onChange={this.props.handleChange}/>
         </FormGroup>
         <FormGroup>
           <Label for="Interval">Interval</Label>
@@ -67,7 +79,7 @@ class DebtGen extends React.Component {
         </FormGroup>
         <FormGroup>
           <Label for="faceValue">Face Value</Label>
-          <Input type="text" name="faceValue" id="faceValue" />
+          <Input type="text" name="faceValue" id="faceValue" onChange={this.props.handleChange}/>
         </FormGroup>
         <FormGroup>
           <Label for="issuePrice">Issue Price</Label>
@@ -85,8 +97,20 @@ class OptionsGen extends React.Component {
     return(
       <React.Fragment>
         <FormGroup>
-          <Label for="ownershipUnits">Share Limit</Label>
+          <Label for="ownershipUnits">Number of Options</Label>{/* Each option is the right to buy/sell 100 shares */}
           <Input type="text" name="ownershipUnits" id="ownershipUnits" />
+        </FormGroup>
+        <FormGroup>
+          <Label for="expirationDate">Expiration Date</Label>
+          <Input type="text" name="expirationDate" id="expirationDate" />
+        </FormGroup>
+        <FormGroup>
+          <Label for="strikePrice">Strike Price</Label>
+          <Input type="text" name="strikePrice" id="strikePrice" />
+        </FormGroup>
+        <FormGroup>
+          <Label for="optionType">Put/Call</Label>
+          <Input type="text" name="optionType" id="optionType" />
         </FormGroup>
         <p>options</p>
       </React.Fragment>
