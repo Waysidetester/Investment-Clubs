@@ -75,7 +75,7 @@ namespace Investment_Clubs.Database.Investments
             throw new Exception("I cannot get the pending investments for this user");
         }
 
-        // Details per investment
+        // Details of an investment per investment
         internal IUserInvestment GetFullInvestDetails(int partnerId, int investmentId)
         {
             using (SqlConnection db = new SqlConnection(_connectionString))
@@ -99,9 +99,10 @@ namespace Investment_Clubs.Database.Investments
                     return InvestDetail;
                 }
             }
-            throw new Exception("I cannot get the pending investments for this user");
+            throw new Exception("I cannot get the investment detail for this Investment");
         }
 
+        // Gets all investments for a club
         internal IEnumerable<IUserInvestment> GetClubInvestDetails(int clubId)
         {
             using (SqlConnection db = new SqlConnection(_connectionString))
@@ -124,9 +125,10 @@ namespace Investment_Clubs.Database.Investments
                     return InvestDetail;
                 }
             }
-            throw new Exception("I cannot get the pending investments for this user");
+            throw new Exception("I cannot get the investments for this Club");
         }
 
+        // gets ROI for the entire club
         internal decimal ClubROI(int clubId)
         {
             using (SqlConnection db = new SqlConnection(_connectionString))
@@ -140,25 +142,66 @@ namespace Investment_Clubs.Database.Investments
                     GROUP BY ClubId";
                 var parameters = new { ClubId = clubId };
 
-                var InvestDetail = db.QueryFirstOrDefault<decimal>(querystring, parameters);
+                var InvestDetail = db.QueryFirstOrDefault<decimal?>(querystring, parameters);
 
                 if (InvestDetail != null)
                 {
-                    return InvestDetail;
+                    return (decimal)InvestDetail;
                 }
             }
-            throw new Exception("I cannot get the pending investments for this user");
+            throw new Exception("I cannot get the club's ROI");
         }
 
-        /*
-           SELECT SUM(Performance.InvPerform)PROI
-           FROM (
-	           SELECT ((DollarsDivested - DollarsInvested) * pci.PercentContributed) InvPerform, pci.Id partClubInv
-	           FROM Investment i
-		           join PartnerClubInvestment pci on pci.InvestmentId = i.Id
-	           WHERE ClubId = 1 and pci.Id = 9) as Performance
-           GROUP BY partClubInv*/
+        // gets the ROI for specific user as a part of club
+        internal decimal PartnersClubROI(int partnerId, int clubId)
+        {
+            using (SqlConnection db = new SqlConnection(_connectionString))
+            {
+                int partnerClubId = PartnerClubId(partnerId, clubId, db);
 
+                string querystring = @"	
+                    SELECT SUM(Performance.InvPerform)PROI
+                    FROM (
+	                    SELECT ((DollarsDivested - DollarsInvested) * pci.PercentContributed) InvPerform, pc.Id partClubInv
+	                    FROM Investment i
+		                    join PartnerClubInvestment pci on pci.InvestmentId = i.Id
+		                    join PartnerClub pc on pc.Id = pci.PartnerClubId
+	                    WHERE i.ClubId = @ClubId and pc.Id = @PartClubId) as Performance
+                    GROUP BY partClubInv";
+                var parameters = new { ClubId = clubId, PartClubId = partnerClubId };
+
+                var InvestDetail = db.QueryFirstOrDefault<decimal?>(querystring, parameters);
+
+                if (InvestDetail != null)
+                {
+                    return (decimal)InvestDetail;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            throw new Exception("I cannot get the partner's ROI for this club");
+        }
+
+        // Gets partner's Id for membership of club
+        internal int PartnerClubId(int partnerId, int clubId, SqlConnection connection)
+        {
+            string querystring = @"	
+                SELECT pc.Id
+                FROM PartnerClub pc 
+	                join Partner p on p.Id = pc.PartnerId
+                WHERE p.Id = @PartnerId and pc.ClubId = @ClubId and pc.ApprovedMember=1";
+            var parameters = new { PartnerId = partnerId, ClubId = clubId };
+
+            var partnerClubId = connection.QueryFirstOrDefault<int?>(querystring, parameters);
+
+            if (partnerClubId != null)
+            {
+                return (int)partnerClubId;
+            }
+            throw new Exception("I cannot get the partner's PartnerClubId");
+        }
     }
 }
 
