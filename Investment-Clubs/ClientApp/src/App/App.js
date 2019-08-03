@@ -8,6 +8,7 @@ import MyNav from '../SiteWide/MyNav/MyNav';
 import Home from '../Pages/Home/Home';
 import Account from '../Pages/Account/Account';
 import Club from '../Pages/Club/Club';
+import NewInvestment from '../Pages/NewInvestment/NewInvestment';
 import Disclaimer from '../SiteWide/Disclaimer/Disclaimer';
 import ProspGerm from '../Db/ProspGerm/ProspGermFactory';
 import './App.scss';
@@ -47,6 +48,7 @@ class App extends React.Component{
                   <RouteWithProps path='/home' component={Home} currentUser={currentUser} />
                   <RouteWithProps path='/account' component={Account} currentUser={currentUser} />} />
                   <RouteWithProps path='/club' component={Club} currentUser={currentUser} />
+                  <RouteWithProps path='/proposal' component={NewInvestment} currentUser={currentUser} />
                 </Switch>
               </div>
             </React.Fragment>
