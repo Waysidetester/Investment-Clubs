@@ -150,6 +150,15 @@ namespace Investment_Clubs.Database.Investments
             throw new Exception("I cannot get the pending investments for this user");
         }
 
+        /*
+           SELECT SUM(Performance.InvPerform)PROI
+           FROM (
+	           SELECT ((DollarsDivested - DollarsInvested) * pci.PercentContributed) InvPerform, pci.Id partClubInv
+	           FROM Investment i
+		           join PartnerClubInvestment pci on pci.InvestmentId = i.Id
+	           WHERE ClubId = 1 and pci.Id = 9) as Performance
+           GROUP BY partClubInv*/
+
     }
 }
 
