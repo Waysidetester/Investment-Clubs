@@ -10,17 +10,35 @@ class DebtGen extends React.Component {
   render(){
     return(
       <React.Fragment>
-        <FormGroup>
-          <Label for="ownershipUnits">Bonds/Bills</Label>
-          <Input type="text" name="ownershipUnits" id="ownershipUnits" onChange={this.props.handleChange}/>
+        <FormGroup required>
+          <Label for="ownershipUnits"># of Bonds/Bills</Label>
+          <Input type='number'
+            name="ownershipUnits"
+            id="ownershipUnits"
+            onChange={this.props.handleChange}
+            min='0'
+            placeholder='10'
+          />
         </FormGroup>
         <FormGroup>
           <Label for="debtCoupon">Coupon</Label>
-          <Input type="text" name="debtCoupon" id="debtCoupon" onChange={this.props.handleChange}/>
+          <Input
+            type="number"
+            name="debtCoupon"
+            id="debtCoupon"
+            onChange={this.props.handleChange}
+            min='0'
+            max='100'
+            placeholder='5%'
+          />
         </FormGroup>
         <FormGroup>
           <Label for="matureDate">Mature Date</Label>
-          <Input type="text" name="matureDate" id="matureDate" onChange={this.props.handleChange}/>
+          <Input type="date" name="matureDate" id="matureDate" onChange={this.props.handleChange}/>
+        </FormGroup>
+        <FormGroup>
+          <Label for="nextCouponPayment">Next Coupon Date</Label>
+          <Input type="date" name="nextCouponPayment" id="nextCouponPayment" onChange={this.props.handleChange}/>
         </FormGroup>
         <FormGroup>
           <Label for="Interval">Interval</Label>
@@ -35,14 +53,12 @@ class DebtGen extends React.Component {
         </FormGroup>
         <FormGroup>
           <Label for="faceValue">Face Value</Label>
-          <Input type="text" name="faceValue" id="faceValue" onChange={this.props.handleChange}/>
+          <Input type="number" name="faceValue" id="faceValue" min='0' onChange={this.props.handleChange}/>
         </FormGroup>
         <FormGroup>
           <Label for="issuePrice">Issue Price</Label>
-          <Input type="text" name="issuePrice" id="issuePrice" disabled/>
+          <Input type="number" name="issuePrice" id="issuePrice" min='0' disabled/>
         </FormGroup>
-
-        <p>debt</p>
       </React.Fragment>
     );
   }

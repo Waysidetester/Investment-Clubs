@@ -9,19 +9,38 @@ class OptionsGen extends React.Component {
   render(){
     return(
       <React.Fragment>
-        <FormGroup>
+        <FormGroup required>
           <Label for="ownershipUnits">Number of Options</Label>{/* Each option is the right to buy/sell 100 shares */}
-          <Input type="text" name="ownershipUnits" id="ownershipUnits" onChange={this.props.handleChange}/>
+          <Input 
+            type="number"
+            name="ownershipUnits"
+            id="ownershipUnits"
+            onChange={this.props.handleChange}
+            min='0'
+          />
         </FormGroup>
-        <FormGroup>
-          <Label for="expirationDate">Expiration Date</Label>
-          <Input type="text" name="expirationDate" id="expirationDate" onChange={this.props.handleChange}/>
+        <FormGroup required>
+          <Label for="matureDate">Expiration Date</Label>
+          <Input
+            type="date"
+            name="matureDate"
+            id="matureDate"
+            onChange={this.props.handleChange}
+            min={Date.now()}
+          />
         </FormGroup>
-        <FormGroup>
-          <Label for="strikePrice">Strike Price</Label>
-          <Input type="text" name="strikePrice" id="strikePrice" onChange={this.props.handleChange}/>
+        <FormGroup required>
+          <Label for="contractPrice">Strike Price</Label>
+          <Input
+            type="number"
+            name="contractPrice"
+            id="contractPrice"
+            onChange={this.props.handleChange}
+            min="0"
+            placeholder="0.00"
+          />
         </FormGroup>
-        <FormGroup tag="fieldset">
+        <FormGroup tag="fieldset"  required>
             <legend>Option Type</legend>
             <FormGroup check>
               <Label check>
@@ -36,7 +55,6 @@ class OptionsGen extends React.Component {
               </Label>
             </FormGroup>
           </FormGroup>
-        <p>options</p>
       </React.Fragment>
     );
   }
