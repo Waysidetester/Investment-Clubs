@@ -108,7 +108,7 @@ class Club extends React.Component{
             <p>{this.state.partnerROI === null ? '' : `Your ROI in ${this.state.club.clubName}: $${this.state.partnerROI}`}</p>
           </Jumbotron>
           <PartnerList partners={this.state.partners} />
-          <PendingVotesContainer votes={this.state.votes} />
+          <PendingVotesContainer votes={this.state.votes} UpdateVote={this.UpdateVote}/>
           <ClubInvestments clubInvs={this.state.clubInvs}/>
         </div>
       );
