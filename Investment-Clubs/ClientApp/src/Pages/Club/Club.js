@@ -1,6 +1,7 @@
 import React from 'react';
 import PartnerList from '../../components/Partners/Basic/PartnerList';
 import ClubInvestments from '../../components/Investments/ClubInvestment/ClubInvestments';
+import PendingVotesContainer from'../../components/Votes/Container/PendingVotesContainer';
 import { 
   Jumbotron,
   Button,
@@ -107,6 +108,7 @@ class Club extends React.Component{
             <p>{this.state.partnerROI === null ? '' : `Your ROI in ${this.state.club.clubName}: $${this.state.partnerROI}`}</p>
           </Jumbotron>
           <PartnerList partners={this.state.partners} />
+          <PendingVotesContainer votes={this.state.votes} />
           <ClubInvestments clubInvs={this.state.clubInvs}/>
         </div>
       );
