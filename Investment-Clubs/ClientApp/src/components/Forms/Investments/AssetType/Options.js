@@ -9,7 +9,7 @@ class OptionsGen extends React.Component {
   render(){
     return(
       <React.Fragment>
-        <FormGroup required>
+        <FormGroup >
           <Label for="ownershipUnits">Number of Options</Label>{/* Each option is the right to buy/sell 100 shares */}
           <Input 
             type="number"
@@ -17,9 +17,10 @@ class OptionsGen extends React.Component {
             id="ownershipUnits"
             onChange={this.props.handleChange}
             min='0'
+            required
           />
         </FormGroup>
-        <FormGroup required>
+        <FormGroup>
           <Label for="matureDate">Expiration Date</Label>
           <Input
             type="date"
@@ -27,9 +28,10 @@ class OptionsGen extends React.Component {
             id="matureDate"
             onChange={this.props.handleChange}
             min={Date.now()}
+            required
           />
         </FormGroup>
-        <FormGroup required>
+        <FormGroup>
           <Label for="contractPrice">Strike Price</Label>
           <Input
             type="number"
@@ -38,19 +40,20 @@ class OptionsGen extends React.Component {
             onChange={this.props.handleChange}
             min="0"
             placeholder="0.00"
+            required
           />
         </FormGroup>
-        <FormGroup tag="fieldset"  required>
+        <FormGroup tag="fieldset">
             <legend>Option Type</legend>
             <FormGroup check>
               <Label check>
-                <Input type="radio" name='optionType' value='put' onClick={this.props.handleChange} />
+                <Input type="radio" name='optionType' value='put' onClick={this.props.handleChange} required/>
                 Put
               </Label>
             </FormGroup>
             <FormGroup check>
               <Label check>
-                <Input type="radio"  name='optionType' value='call' onClick={this.props.handleChange} />
+                <Input type="radio"  name='optionType' value='call' onClick={this.props.handleChange} required/>
                 Call
               </Label>
             </FormGroup>

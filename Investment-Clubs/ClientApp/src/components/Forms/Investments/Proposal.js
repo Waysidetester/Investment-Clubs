@@ -6,6 +6,7 @@ import {
   Label,
   Input,
   FormGroup,
+  FormFeedback,
   Button,
 } from 'reactstrap';
 import './Proposal.scss';
@@ -70,11 +71,13 @@ class Proposal extends React.Component{
   }
 
   handleChange = event => {
+    event.target.checkValidity();
     this.setState({[event.target.name]: event.target.value});
   }
 
   handleSubmit = event => {
     event.preventDefault();
+    event.target.checkValidity();
     const newInvestment = this.formPutObj();
     console.log(this.state, typeof(this.state))
     console.log(newInvestment, typeof(newInvestment))
@@ -88,38 +91,40 @@ class Proposal extends React.Component{
     return(
       <div>
         <Form autoComplete={'off'} onSubmit={(e) => this.handleSubmit(e)}>
-          <FormGroup tag="fieldset" required>
+          <FormGroup tag="fieldset" >
             <legend>Radio Buttons</legend>
             <FormGroup check>
               <Label check>
-                <Input type="radio" name='assetType' value='1' onClick={this.handleChange} />
+                <Input type="radio" name='assetType' value='1' onClick={this.handleChange} required/>
                 Equity
               </Label>
             </FormGroup>
             <FormGroup check>
               <Label check>
-                <Input type="radio"  name='assetType' value='2' onClick={this.handleChange} />
+                <Input type="radio"  name='assetType' value='2' onClick={this.handleChange} required/>
                 Debt
               </Label>
             </FormGroup>
             <FormGroup check>
               <Label check>
-                <Input type="radio" name='assetType' value='3' onClick={this.handleChange} />
+                <Input type="radio" name='assetType' value='3' onClick={this.handleChange} required/>
                 Options
               </Label>
             </FormGroup>
           </FormGroup>
-          <FormGroup required>
-            <Label for="receivingEntity" required>Issuing Holder's Name/Doing Business As</Label>
-            <Input type="text" name="receivingEntity" id="receivingEntity" onChange={this.handleChange}/>
+          <FormGroup>
+            <Label for="receivingEntity">Issuing Holder's Name/Doing Business As</Label>
+            <Input type="text" name="receivingEntity" id="receivingEntity" onChange={this.handleChange} required/>
+            <FormFeedback>Please Select An Option</FormFeedback>
+
           </FormGroup>
-          <FormGroup required>
-            <Label for="dollarsInvested" required>Proposed Amount</Label>
-            <Input type="number" name="dollarsInvested" id="dollarsInvested" onChange={this.handleChange}/>
+          <FormGroup >
+            <Label for="dollarsInvested" >Proposed Amount</Label>
+            <Input type="number" name="dollarsInvested" id="dollarsInvested" onChange={this.handleChange} required/>
           </FormGroup>
-          <FormGroup required>
-            <Label for="proposalExpireDate" required>Proposal Expiration Date</Label>
-            <Input type="date" min={Date.now()} name="proposalExpireDate" id="proposalExpireDate" onChange={this.handleChange}/>
+          <FormGroup >
+            <Label for="proposalExpireDate">Proposal Expiration Date</Label>
+            <Input type="date" min={Date.now()} name="proposalExpireDate" id="proposalExpireDate" onChange={this.handleChange} required/>
           </FormGroup>
           {AssetSpecifGen(this.state.assetType, this.handleChange)}
           <Button type="submit">Submit</Button>

@@ -10,7 +10,7 @@ class DebtGen extends React.Component {
   render(){
     return(
       <React.Fragment>
-        <FormGroup required>
+        <FormGroup>
           <Label for="ownershipUnits"># of Bonds/Bills</Label>
           <Input type='number'
             name="ownershipUnits"
@@ -18,6 +18,7 @@ class DebtGen extends React.Component {
             onChange={this.props.handleChange}
             min='0'
             placeholder='10'
+            required
           />
         </FormGroup>
         <FormGroup>
@@ -30,19 +31,20 @@ class DebtGen extends React.Component {
             min='0'
             max='100'
             placeholder='5%'
+            required
           />
         </FormGroup>
         <FormGroup>
           <Label for="matureDate">Mature Date</Label>
-          <Input type="date" name="matureDate" id="matureDate" onChange={this.props.handleChange}/>
+          <Input type="date" name="matureDate" id="matureDate" onChange={this.props.handleChange} required/>
         </FormGroup>
         <FormGroup>
           <Label for="nextCouponPayment">Next Coupon Date</Label>
-          <Input type="date" name="nextCouponPayment" id="nextCouponPayment" onChange={this.props.handleChange}/>
+          <Input type="date" name="nextCouponPayment" id="nextCouponPayment" onChange={this.props.handleChange} required/>
         </FormGroup>
         <FormGroup>
           <Label for="Interval">Interval</Label>
-          <CustomInput type="select" id="Interval" name="Interval" onClick={this.props.handleChange}>
+          <CustomInput type="select" id="Interval" name="Interval" onClick={this.props.handleChange} required>
             <option value={""}>Select</option>
             <option value="12">Monthly</option>
             <option value="6">Bimonthly (every 2 months)</option>
@@ -53,11 +55,11 @@ class DebtGen extends React.Component {
         </FormGroup>
         <FormGroup>
           <Label for="faceValue">Face Value</Label>
-          <Input type="number" name="faceValue" id="faceValue" min='0' onChange={this.props.handleChange}/>
+          <Input type="number" name="faceValue" id="faceValue" min='0' onChange={this.props.handleChange} required/>
         </FormGroup>
         <FormGroup>
           <Label for="issuePrice">Issue Price</Label>
-          <Input type="number" name="issuePrice" id="issuePrice" min='0' disabled/>
+          <Input type="number" name="issuePrice" id="issuePrice" min='0' disabled required/>
         </FormGroup>
       </React.Fragment>
     );
