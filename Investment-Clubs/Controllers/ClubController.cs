@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Investment_Clubs.Database.Clubs;
 using Investment_Clubs.Database.Investments;
-
+using Investment_Clubs.Models.Investments;
 
 namespace Investment_Clubs.Controllers
 {
@@ -22,6 +22,7 @@ namespace Investment_Clubs.Controllers
             _invDetailConnect = invDetailConnect;
         }
 
+        // basic club info
         [HttpGet]
         public IActionResult ClubPageContent(int partnerId, int clubId)
         {
@@ -37,6 +38,7 @@ namespace Investment_Clubs.Controllers
             }
         }
 
+        // list of partners in club
         [HttpGet("partners")]
         public IActionResult ClubMembers(int partnerId, int clubId)
         {
@@ -52,7 +54,7 @@ namespace Investment_Clubs.Controllers
             }
         }
 
-
+        // list of club investments
         [HttpGet("investments")]
         public IActionResult ClubInvestments(int partnerId, int clubId)
         {
@@ -68,6 +70,7 @@ namespace Investment_Clubs.Controllers
             }
         }
 
+        // club ROI to date
         [HttpGet("CROI")]
         public IActionResult ClubReturnOnInv(int clubId)
         {
@@ -98,5 +101,20 @@ namespace Investment_Clubs.Controllers
             }
         }
 
+        [HttpPost]
+        public IActionResult ProposeInvestment(ProposedInvestment proposal)
+        {
+            try
+            {
+                var newInvestment = _invDetailConnect.ProposeInvestment(proposal);
+
+                return Accepted(newInvestment);
+            }
+            catch
+            {
+                return BadRequest("unable to create investment proposal");
+            }
+
+        }
     }
 }

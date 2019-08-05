@@ -202,6 +202,52 @@ namespace Investment_Clubs.Database.Investments
             }
             throw new Exception("I cannot get the partner's PartnerClubId");
         }
+
+        internal ClubInvestments ProposeInvestment(ProposedInvestment proposal)
+        {
+            using (SqlConnection db = new SqlConnection(_connectionString))
+            {
+                if(proposal.Interval != null)
+                {
+                    proposal.NextCouponPayment = new DateTime().AddDays((double)proposal.Interval * 30);
+                }
+                string querystring = @"	
+                    INSERT INTO Investment (AssetType, ClubId, OwnershipUnits, DollarsInvested, 
+	                    ReceivingEntity, DebtCoupon, MatureDate, ContractPrice, PercentEquity,
+	                    Convertable, ProposalExpireDate, NextCouponPayment, Interval,
+	                    FaceValue, Pending, Invested)
+                    OUTPUT INSERTED.*
+                    VALUES(@AssetType, @ClubId, @OwnershipUnits, @DollarsInvested, 
+                        @ReceivingEntity, @DebtCoupon, @MatureDate, @ContractPrice, @PercentEquity,
+	                    @Convertable, @ProposalExpireDate, @NextCouponPayment, @Interval,
+	                    @FaceValue, 1,0)";
+                var parameters = new
+                {
+                    AssetType = proposal.AssetType,
+                    ClubId = proposal.ClubId,
+                    OwnershipUnits = proposal.OwnershipUnits,
+                    DollarsInvested = proposal.DollarsInvested,
+                    ReceivingEntity = proposal.ReceivingEntity,
+                    DebtCoupon = proposal.DebtCoupon,
+                    MatureDate = proposal.MatureDate,
+                    ContractPrice = proposal.ContractPrice,
+                    PercentEquity = proposal.PercentEquity,
+                    Convertable = proposal.Convertable,
+                    ProposalExpireDate = proposal.ProposalExpireDate,
+                    NextCouponPayment = proposal.NextCouponPayment,
+                    Interval = proposal.Interval,
+                    FaceValue = proposal.FaceValue,
+                };
+
+                var newInvestment = db.QueryFirstOrDefault<ClubInvestments>(querystring, parameters);
+
+                if (newInvestment != null)
+                {
+                    return newInvestment;
+                }
+            }
+            throw new Exception("I cannot get the partner's PartnerClubId");
+        }
     }
 }
 

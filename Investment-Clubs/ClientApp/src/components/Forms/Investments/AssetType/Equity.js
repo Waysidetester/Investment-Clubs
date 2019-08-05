@@ -18,10 +18,6 @@ class EquityGen extends React.Component {
           <Input type="number" name="percentEquity" id="percentEquity" min='0' max='100' placeholder='8%' onChange={this.props.handleChange}/>
         </FormGroup>
         <FormGroup>
-          <Label for="fairMarkitValue">Fair Market Value</Label>
-          <Input type="number" name="fairMarkitValue" id="fairMarkitValue" min='0' onChange={this.props.handleChange}/>
-        </FormGroup>
-        <FormGroup>
           <Label for="valuation">Valuation</Label>
           <Input type="text" name="valuation" id="valuation" disabled/>
         </FormGroup>

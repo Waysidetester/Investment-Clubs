@@ -7,7 +7,7 @@ class NewInvestment extends React.Component{
     return(
       <div>
         <h1>New Investment Page</h1>
-        <Proposal />
+        <Proposal location={this.props.location}/>
       </div>
     );
   }
