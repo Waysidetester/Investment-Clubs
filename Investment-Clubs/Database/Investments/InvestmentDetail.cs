@@ -207,7 +207,7 @@ namespace Investment_Clubs.Database.Investments
         {
             using (SqlConnection db = new SqlConnection(_connectionString))
             {
-                if(proposal.Interval != null)
+                if (proposal.Interval != null)
                 {
                     proposal.NextCouponPayment = new DateTime().AddDays((double)proposal.Interval * 30);
                 }
@@ -243,10 +243,55 @@ namespace Investment_Clubs.Database.Investments
 
                 if (newInvestment != null)
                 {
+                    var PartnerIds = GetPartnerIds(newInvestment.ClubId, db);
+                    AddInvToPartners(PartnerIds, newInvestment.ClubId, newInvestment.Id, db);
                     return newInvestment;
                 }
             }
             throw new Exception("I cannot get the partner's PartnerClubId");
+        }
+
+        internal void AddInvToPartners(IEnumerable<int> partnerIds, int clubId, int investmentId, SqlConnection db)
+        {
+            var partners = partnerIds.ToList();
+            for (int i = 0; i < partnerIds.Count(); i++){
+                string querystring = @"	
+                    INSERT INTO PartnerClubInvestment (PartnerClubId, ClubId, InvestmentId, PercentContributed, Abstain, Vote)
+                    OUTPUT INSERTED.*
+                    VALUES(@PartnerClubId, @ClubId, @InvestmentId, 0, 1, null)";
+                var parameters = new
+                {
+                    PartnerClubId = partners[i],
+                    ClubId = clubId,
+                    InvestmentId = investmentId
+                };
+
+                var newInvestment = db.QueryFirstOrDefault(querystring, parameters);
+
+                if (newInvestment == null)
+                {
+                    throw new Exception("I cannot add investment to partners");
+                }
+            }
+        }
+
+        internal IEnumerable<int> GetPartnerIds(int clubId, SqlConnection db)
+        {
+                string querystring = @"	
+                    SELECT pc.PartnerId
+                    FROM PartnerClub pc
+	                    join Club c on c.Id = pc.ClubId
+                    WHERE pc.ClubId=@ClubId and pc.ApprovedMember = 1";
+                var parameters = new
+                { ClubId = clubId };
+
+                var clubPartnerIds = db.Query<int>(querystring, parameters);
+
+                if (clubPartnerIds != null)
+                {
+                    return clubPartnerIds;
+                }
+            throw new Exception("I cannot get the partners of this club");
         }
     }
 }
