@@ -1,7 +1,10 @@
 import React from 'react';
 import PartnerList from '../../components/Partners/Basic/PartnerList';
 import ClubInvestments from '../../components/Investments/ClubInvestment/ClubInvestments';
-import { Jumbotron } from 'reactstrap';
+import { 
+  Jumbotron,
+  Button,
+} from 'reactstrap';
 import ProspGerm from '../../Db/ProspGerm/ProspGermFactory';
 import './Club.scss';
 
@@ -90,6 +93,7 @@ class Club extends React.Component{
     if(this.state.club !== null){
       return(
         <div>
+          <Button color='info' href={`/proposal${this.props.location.search}`}>Propose investment</Button>
           <Jumbotron>
             <h1 className="display-3">{this.state.club.clubName}</h1>
             <h3>Investable --- {this.state.club.clubInvestable.toLocaleString('en-US', {style: 'currency', currency:'USD'})}</h3>

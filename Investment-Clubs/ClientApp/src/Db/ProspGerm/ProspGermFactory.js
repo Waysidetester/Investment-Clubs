@@ -115,6 +115,11 @@ const PartnersClubROI = (query) => new Promise((Resolve, Reject) => {
   .catch(err => Reject(err))
 });
 
+const ProposeInvestment = invObj => new Promise ((Resolve, Reject) => {
+  axios.post(`${baseUrl}/api/club`, invObj)
+    .then(res => Resolve(res))
+    .catch(rej => Reject(rej))
+});
 
 export default {
   GetClubsForUser,
@@ -129,5 +134,6 @@ export default {
   ClubPartners,
   ClubInvestments,
   ClubROI,
-  PartnersClubROI
+  PartnersClubROI,
+  ProposeInvestment
 }
