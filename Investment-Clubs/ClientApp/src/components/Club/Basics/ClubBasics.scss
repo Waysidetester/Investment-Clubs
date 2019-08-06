@@ -6,18 +6,20 @@
 
 .single-club-basics:last-of-type {
   border-bottom: none;
+  margin-bottom: 0px;
 }
 
 .single-club-partner-group{
   display: flex;
+  flex-direction: column;
   justify-content: space-around;
   align-items: center;
 }
 
 .basic-accredited-counts{
+  margin-top: 15px;
   display: flex;
-  justify-content: end;
-  flex-direction: column;
+  flex-direction: row;
   border: 1px solid #000;
 }
 
@@ -28,4 +30,21 @@
 .single-club-type{
   text-align: center;
   font-weight: bold;
+}
+
+.accredited-count-item:first-of-type {
+  border-left: none;
+}
+
+.accredited-count-item{
+  text-align: center;
+  border-left: 1px solid #000;
+  margin-bottom: 0px;
+  padding: 13px;
+}
+
+.single-club-investable{
+  margin-top: 19px;
+  font-size: 23px;
+  text-align: center;
 }

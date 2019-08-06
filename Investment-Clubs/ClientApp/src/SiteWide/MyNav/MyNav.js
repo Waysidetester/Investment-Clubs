@@ -61,9 +61,6 @@ class MyNav extends React.Component{
               <NavLink href="/account">Your Profile</NavLink>
             </NavItem>
               {this.ClubSetter()}
-            <NavItem>
-              <NavLink href="https://github.com/reactstrap/reactstrap">Investment Page</NavLink>
-            </NavItem>
           </Nav>
         </Collapse>
         <Button color={'danger'} onClick={this.props.ShowDisclaimer}>Disclaimer</Button>

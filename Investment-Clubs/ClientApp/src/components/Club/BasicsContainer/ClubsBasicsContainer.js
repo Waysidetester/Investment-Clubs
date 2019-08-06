@@ -2,7 +2,6 @@ import React from 'react';
 import ClubBasics from '../Basics/ClubBasics';
 import {
   Card,
-  CardTitle,
   CardBody,
 } from 'reactstrap';
 import './ClubsBasicsContainer.scss';
