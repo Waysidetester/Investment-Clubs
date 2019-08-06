@@ -63,7 +63,7 @@ class MyNav extends React.Component{
               {this.ClubSetter()}
           </Nav>
         </Collapse>
-        <Button color={'danger'} onClick={this.props.ShowDisclaimer}>Disclaimer</Button>
+        <Button className='disclaimer-button' color={'danger'} onClick={this.props.ShowDisclaimer}>Disclaimer</Button>
       </Navbar>
     );
   }
