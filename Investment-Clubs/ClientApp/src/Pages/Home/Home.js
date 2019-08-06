@@ -53,9 +53,11 @@ class Home extends React.Component{
     
     return(
       <div>
-        <h1>Home page</h1>
-        <ClubsBasicsContainer clubs={this.state.clubs}/>
-        <PendingVotesContainer votes={this.state.votes} UpdateVote={this.UpdateVote}/>
+        <h1 className='home-title'>Home page</h1>
+        <div className='home-items'>
+          <ClubsBasicsContainer  clubs={this.state.clubs}/>
+          <PendingVotesContainer votes={this.state.votes} UpdateVote={this.UpdateVote}/>
+        </div>
       </div>
     );
   }

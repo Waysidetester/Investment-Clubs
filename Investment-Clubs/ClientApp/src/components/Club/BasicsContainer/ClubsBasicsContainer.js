@@ -2,7 +2,6 @@ import React from 'react';
 import ClubBasics from '../Basics/ClubBasics';
 import {
   Card,
-  CardTitle,
   CardBody,
 } from 'reactstrap';
 import './ClubsBasicsContainer.scss';
@@ -22,14 +21,14 @@ class ClubsBasicsContainer extends React.Component{
     }
 
     return(
-      <Card>
-        <CardBody className='home-clubs-container'>
-          <CardTitle><h2>Clubs</h2></CardTitle>
-        </CardBody>
-        <CardBody>
-          {this.ClubBasicsGenerator()}
-        </CardBody>
-      </Card>
+      <div className='home-club-card'>
+        <h2>Your Clubs</h2>
+        <Card >
+          <CardBody>
+            {this.ClubBasicsGenerator()}
+          </CardBody>
+        </Card>
+      </div>
     );
   }
 }

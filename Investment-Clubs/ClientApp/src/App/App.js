@@ -22,6 +22,7 @@ class App extends React.Component{
   state = {
     userId: window.localStorage.getItem("userId"),
     clubIds: null,
+    disclaimer: false,
   }
 
   componentDidMount(){
@@ -32,6 +33,11 @@ class App extends React.Component{
       .catch(err => console.error(err));
   }
 
+  ShowDisclaimer = () => {
+    const disclaimerClass = this.state.disclaimer;
+    disclaimerClass === true ? this.setState({disclaimer: false}) : this.setState({disclaimer: true});
+  }
+
   render() {
     // parsing userId to int for axios calls
     const currentUser = parseInt(this.state.userId, 10)
@@ -40,8 +46,8 @@ class App extends React.Component{
         <div>
           <BrowserRouter>
             <React.Fragment>
-              <MyNav clubIds={this.state.clubIds} currentUser={currentUser}/>
-              <Disclaimer />
+              <MyNav clubIds={this.state.clubIds} currentUser={currentUser} ShowDisclaimer={this.ShowDisclaimer}/>
+              <Disclaimer display={this.state.disclaimer} />
               <div className='container'>
                 <Switch>
                   <RouteWithProps path='/' exact component={Home} currentUser={currentUser} />

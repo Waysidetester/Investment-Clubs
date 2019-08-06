@@ -1,6 +1,5 @@
 import React from 'react';
 import PendingVotes from '../Detail/PendingVotes';
-import { ListGroup } from 'reactstrap';
 import './PendingVotesContainer.scss';
 
 // loaded in Home page. Contains all pending votes for user
@@ -12,16 +11,19 @@ class PendingVotesContainer extends React.Component{
   render() {
     if(this.props.votes <= 0){
       return (
-        <ListGroup>
+        <ul className='vote-container'>
           <p>you have no pending votes</p>
-        </ListGroup>
+        </ul>
       )
     }
 
     return(
-      <ListGroup>
-        {this.PendVoteGenerator()}
-      </ListGroup>
+      <div className='vote-container'>
+        <h3 className='vote-container-title'>Pending Investments</h3>
+        <div className='vote-generator'>
+          {this.PendVoteGenerator()}
+        </div>
+      </div>
     );
   }
 }
