@@ -55,7 +55,8 @@ namespace Investment_Clubs.Database.Investments
                 string querystring = @"	
                     SELECT i.Id InvestmentId, it.InvestmentType, i.ClubId, i.OwnershipUnits,
 	                     i.DollarsInvested, i.ReceivingEntity, i.DebtCoupon, i.MatureDate,
-	                     i.ContractPrice, i.PercentEquity, i.InvestDate, i.DivestDate, i.Convertable 
+	                     i.ContractPrice, i.PercentEquity, i.InvestDate, i.DivestDate, i.Convertable,
+		                 i.ProposalExpireDate, i.NextCouponPayment, i.Interval, i.FaceValue
                     FROM Partner p
 	                    join PartnerClub pc on p.Id = pc.PartnerId
 	                    join PartnerClubInvestment pci on pci.PartnerClubId = pc.id

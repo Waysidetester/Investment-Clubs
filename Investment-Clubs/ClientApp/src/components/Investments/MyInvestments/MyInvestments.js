@@ -42,9 +42,9 @@ class MyInvestments extends React.Component{
     return (
       <tr key={key} invid={inv.investmentId} onClick={() => this.modalBundle(inv.investmentId, inv.partnerId)}>
         <td>{inv.receivingEntity}</td>
-        <td>{inv.percentContributed}</td>
-        <td>{inv.partnerContributed}</td>
-        <td>{inv.totalInvestment}</td>
+        <td>{inv.percentContributed*100}%</td>
+        <td>{inv.partnerContributed.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</td>
+        <td>{inv.totalInvestment.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</td>
         <td>{inv.investmentType}</td>
       </tr>
     );

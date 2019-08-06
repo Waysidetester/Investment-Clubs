@@ -12,6 +12,9 @@ import './InvestmentModal.scss';
 class InvestmentModal extends React.Component{
   valCheck = (text, value) => {
     if(value !== null){
+      if(text === 'Bond Coupon: ' || text === 'Equity Bought: '){
+        return <p>{text}{value.toLocaleString('en-US', {style: 'percent', maximumFractionDigits: 3})}</p>
+      }
       return <p>{text}{value}</p>
     }
   }
@@ -23,13 +26,13 @@ class InvestmentModal extends React.Component{
             <ModalHeader toggle={this.props.toggle}>{this.props.InvDetail.receivingEntity}</ModalHeader>
             <ModalBody>
               <p>Investment Type: {this.props.InvDetail.investmentType}</p>
-              {this.valCheck('Club Investment Amount: ',this.props.InvDetail.dollarsInvested)}
-              {this.valCheck('Bond Coupon: ',this.props.InvDetail.debtCoupon)}
+              {this.valCheck('Club Investment Amount: ',this.props.InvDetail.dollarsInvested.toLocaleString('en-US', {style: 'currency', currency: 'USD'}))}
+              {this.valCheck('Bond Coupon: ', this.props.InvDetail.debtCoupon)}
               {this.valCheck('Asset Units Purchased: ',this.props.InvDetail.ownershipUnits)}
               {this.valCheck('Convertable: ',(this.props.InvDetail.convertable ? 'yes':'no'))}
               {this.valCheck('Date Bond Matures: ',this.props.InvDetail.matureDate)}
               {this.valCheck('Equity Bought: ',this.props.InvDetail.percentEquity)}
-              {this.valCheck('Date Invested: ',this.props.InvDetail.investDate)}
+              {this.valCheck('Date Invested: ',new Date(this.props.InvDetail.investDate).toLocaleDateString())}
             </ModalBody>
             <ModalFooter>
               <Button color="secondary" onClick={this.props.toggle}>Cancel</Button>

@@ -19,5 +19,10 @@ namespace Investment_Clubs.Models.Investments
         public bool Convertable { get; set; }
         public string InvestmentType { get; set; }
         public string ReceivingEntity { get; set; }
+        public DateTime ProposalExpireDate { get; set; }
+        public DateTime? NextCouponPayment { get; set; }
+        public byte? Interval { get; set; }
+        public decimal? FaceValue { get; set; }
+
     }
 }
