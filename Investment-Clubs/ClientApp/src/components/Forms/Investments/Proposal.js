@@ -115,8 +115,7 @@ class Proposal extends React.Component{
           <FormGroup>
             <Label for="receivingEntity">Issuing Holder's Name/Doing Business As</Label>
             <Input type="text" name="receivingEntity" id="receivingEntity" onChange={this.handleChange} required/>
-            <FormFeedback>Please Select An Option</FormFeedback>
-
+            <div className='invalid-feedback'>This is fucked</div>
           </FormGroup>
           <FormGroup >
             <Label for="dollarsInvested" >Proposed Amount</Label>
