@@ -66,7 +66,7 @@ class MyNav extends React.Component{
             </NavItem>
           </Nav>
         </Collapse>
-        <Button onClick={this.props.ShowDisclaimer}>Disclaimer</Button>
+        <Button color={'danger'} onClick={this.props.ShowDisclaimer}>Disclaimer</Button>
       </Navbar>
     );
   }

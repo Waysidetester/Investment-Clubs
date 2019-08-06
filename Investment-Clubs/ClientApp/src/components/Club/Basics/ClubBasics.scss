@@ -8,3 +8,24 @@
   border-bottom: none;
 }
 
+.single-club-partner-group{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.basic-accredited-counts{
+  display: flex;
+  justify-content: end;
+  flex-direction: column;
+  border: 1px solid #000;
+}
+
+.single-club-title{
+  text-align: center;
+}
+
+.single-club-type{
+  text-align: center;
+  font-weight: bold;
+}
