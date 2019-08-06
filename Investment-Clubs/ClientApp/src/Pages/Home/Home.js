@@ -54,8 +54,8 @@ class Home extends React.Component{
     return(
       <div>
         <h1>Home page</h1>
-        <ClubsBasicsContainer clubs={this.state.clubs}/>
         <PendingVotesContainer votes={this.state.votes} UpdateVote={this.UpdateVote}/>
+        <ClubsBasicsContainer clubs={this.state.clubs}/>
       </div>
     );
   }

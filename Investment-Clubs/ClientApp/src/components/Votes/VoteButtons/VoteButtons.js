@@ -71,7 +71,7 @@ class VoteButtons extends React.Component{
   
   render(){
     return(
-      <ButtonGroup>
+      <ButtonGroup className='vote-buttons'>
         <Button color='danger'disabled={this.state.Nay} onClick={() => this.MoldUpdateVote(this.nay)}>Nay</Button>
         <Button color='info' disabled={this.state.Recuse} onClick={() => this.MoldUpdateVote(this.recuse)}>Recuse</Button>
         <Button color='success'disabled={this.state.Aye} onClick={() => this.MoldUpdateVote(this.aye)}>Aye</Button>

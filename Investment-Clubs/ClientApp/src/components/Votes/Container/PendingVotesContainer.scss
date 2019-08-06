@@ -1,0 +1,15 @@
+.vote-container{
+  border: 1px solid #000;
+  border-radius: 28px;
+  width: 350px;
+}
+
+.vote-container-title{
+  text-align: center;
+}
+
+.vote-generator{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}

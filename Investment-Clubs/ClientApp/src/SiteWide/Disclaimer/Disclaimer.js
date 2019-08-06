@@ -4,6 +4,10 @@ import './Disclaimer.scss';
 
 class Disclaimer extends React.Component{
   render(){
+    if(!this.props.display){
+      return (<div/>)
+    }
+
     return(
       <div className='p-3 bg-danger disclaimer rounded'>
         <Toast className='disclaimer-toast'>

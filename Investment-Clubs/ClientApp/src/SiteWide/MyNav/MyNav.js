@@ -11,6 +11,7 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
+  Button
 } from 'reactstrap';
 import './MyNav.scss';
 
@@ -25,10 +26,10 @@ class MyNav extends React.Component{
 
   ClubSetter = () => {
     if(this.props.clubIds !== null){
-      let x = [];
+      let partnersClubs = [];
   
       for(let i=0; i<this.props.clubIds.length; i++){
-        x.push(
+        partnersClubs.push(
           <DropdownItem key={i} href={`/club/?partnerId=${this.props.currentUser}&clubId=${this.props.clubIds[i]}`}>
             Club {(i+1)}
           </DropdownItem>
@@ -41,7 +42,7 @@ class MyNav extends React.Component{
             Clubs
           </DropdownToggle>
           <DropdownMenu right>
-            {x}
+            {partnersClubs}
           </DropdownMenu>
         </UncontrolledDropdown>
       );
@@ -65,6 +66,7 @@ class MyNav extends React.Component{
             </NavItem>
           </Nav>
         </Collapse>
+        <Button onClick={this.props.ShowDisclaimer}>Disclaimer</Button>
       </Navbar>
     );
   }
