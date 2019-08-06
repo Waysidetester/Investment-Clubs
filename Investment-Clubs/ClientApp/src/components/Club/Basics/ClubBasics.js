@@ -10,7 +10,7 @@ class ClubBasics extends React.Component{
         <p className='single-club-investable'>Investable: {this.props.club.clubInvestable.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</p>
         <p className='single-club-type'>Club Type - {this.props.club.selfDirected ? "Self Directed " : "Group Purchasing "}Club</p>
         <div className='single-club-partner-group'>
-          <strong>Total partners: {this.props.club.partnerCount}</strong>
+          <p className='single-club-total-partners'>Total partners: {this.props.club.partnerCount}</p>
           <div className='basic-accredited-counts'>
             <p className='accredited-count-item'>Accredited: {this.props.club.accreditedPartnerCount}</p>
             <p className='accredited-count-item'>{nonAccreditedPartners > 0 ? `Non-Accredited: ${nonAccreditedPartners}` : '0'}</p>
