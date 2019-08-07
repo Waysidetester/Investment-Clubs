@@ -10,7 +10,7 @@ class InvestmentExpanded extends React.Component{
   }
 
   Checker = (val) => {
-      // Checks there is a value in current property and adds to the array if true
+      // returns true if the object key's value is true
       if(val !== null){
         return true;
       }
@@ -19,21 +19,22 @@ class InvestmentExpanded extends React.Component{
 
   render(){
     return(
-    <div>
-      <div>
-        {this.Checker(this.props.inv.receivingEntity) ? <p>For {this.props.inv.receivingEntity}</p> : null}
-        {this.Checker(this.props.inv.ownershipUnits) ? <p>Units: {this.props.inv.ownershipUnits}</p> : null}
-        {this.Checker(this.props.inv.dollarsInvested) ? <p>Proposed Investment Price: {this.props.inv.dollarsInvested.toLocaleString('en-US', {style:'currency', currency:'USD'})}</p> : null}
-        {this.Checker(this.props.inv.debtCoupon) ? <p>Coupon Rate: {this.props.inv.debtCoupon}</p> : null}
-        {this.Checker(this.props.inv.matureDate) ? <p>Maturity Date: {new Date(this.props.inv.matureDate).toLocaleDateString()}</p> : null}
-        {this.Checker(this.props.inv.contractPrice) ? <p>Contract Price: {this.props.inv.contractPrice.toLocaleString('en-US', {style:'currency', currency:'USD'})}</p> : null}
-        {this.Checker(this.props.inv.percentEquity) ? <p>% Equity: {this.props.inv.percentEquity}</p> : null}
-        {this.Checker(this.props.inv.convertable) ? <p>Units: {this.props.inv.convertable ? 'yes' : 'no'}</p> : null}
-        {this.Checker(this.props.inv.investmentType) ? <p>Asset Type: {this.props.inv.investmentType}</p> : null}
-        {this.Checker(this.props.inv.proposalExpireDate) ? <p>Vote Expiration Date: {new Date(this.props.inv.proposalExpireDate).toLocaleDateString()}</p> : null}
-        {this.Checker(this.props.inv.nextCouponPayment) ? <p>Next Coupon Payment on {this.props.inv.nextCouponPayment}</p> : null}
-        {this.Checker(this.props.inv.interval) ? <p>Coupon Payment Interval: {this.props.inv.interval}</p> : null}
-        {this.Checker(this.props.inv.faceValue) ? <p>Bond Face Value: {this.props.inv.faceValue.toLocaleString('en-US', {style:'currency', currency:'USD'})}</p> : null}
+    <div className='investment-expanded-detail-container'>
+      {/* check if there is a value and return info if there is */}
+      {this.Checker(this.props.inv.receivingEntity) ? <h3>Offering Party: {this.props.inv.receivingEntity}</h3> : null}
+      <div className='investment-expanded-details'>
+        {this.Checker(this.props.inv.ownershipUnits) ? <div className='investment-expanded-detail-item'>Units: {this.props.inv.ownershipUnits}</div> : null}
+        {this.Checker(this.props.inv.dollarsInvested) ? <div className='investment-expanded-detail-item'>Proposed Investment Price: {this.props.inv.dollarsInvested.toLocaleString('en-US', {style:'currency', currency:'USD'})}</div> : null}
+        {this.Checker(this.props.inv.debtCoupon) ? <div className='investment-expanded-detail-item'>Coupon Rate: {this.props.inv.debtCoupon}</div> : null}
+        {this.Checker(this.props.inv.matureDate) ? <div className='investment-expanded-detail-item'>Maturity Date: {new Date(this.props.inv.matureDate).toLocaleDateString()}</div> : null}
+        {this.Checker(this.props.inv.contractPrice) ? <div className='investment-expanded-detail-item'>Contract Price: {this.props.inv.contractPrice.toLocaleString('en-US', {style:'currency', currency:'USD'})}</div> : null}
+        {this.Checker(this.props.inv.percentEquity) ? <div className='investment-expanded-detail-item'>Percent Equity: {this.props.inv.percentEquity}</div> : null}
+        {this.Checker(this.props.inv.convertable) ? <div className='investment-expanded-detail-item'>Convertable Asset</div> : null}
+        {this.Checker(this.props.inv.investmentType) ? <div className='investment-expanded-detail-item'>Asset Type: {this.props.inv.investmentType}</div> : null}
+        {this.Checker(this.props.inv.proposalExpireDate) ? <div className='investment-expanded-detail-item'>Vote Expiration Date: {new Date(this.props.inv.proposalExpireDate).toLocaleDateString()}</div> : null}
+        {this.Checker(this.props.inv.nextCouponPayment) ? <div className='investment-expanded-detail-item'>Next Coupon Payment on {this.props.inv.nextCouponPayment}</div> : null}
+        {this.Checker(this.props.inv.interval) ? <div className='investment-expanded-detail-item'>Coupon Payment Interval: {this.props.inv.interval}</div> : null}
+        {this.Checker(this.props.inv.faceValue) ? <div className='investment-expanded-detail-item'>Bond Face Value: {this.props.inv.faceValue.toLocaleString('en-US', {style:'currency', currency:'USD'})}</div> : null}
       </div>
       {this.VoteAvailability()}
     </div>

@@ -5,7 +5,7 @@ class ClubBasics extends React.Component{
     const nonAccreditedPartners = this.props.club.partnerCount - this.props.club.accreditedPartnerCount;
 
     return(
-      <div className="single-club-basics">
+      <div className="single-club-basics basics-border">
         <h3 className='single-club-title'>{this.props.club.clubName}</h3>
         <p className='single-club-investable'>Investable: {this.props.club.clubInvestable.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</p>
         <p className='single-club-type'>Club Type - {this.props.club.selfDirected ? "Self Directed " : "Group Purchasing "}Club</p>

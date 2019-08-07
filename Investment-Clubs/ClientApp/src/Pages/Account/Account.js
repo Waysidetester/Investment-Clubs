@@ -57,7 +57,6 @@ class Account extends React.Component{
   render() {
     return(
       <div>
-        <h2>Account</h2>
         <ClubDetailsContainer 
           clubDetails={this.state.clubDetails}
           investmentDetails={this.state.investmentDetails} 

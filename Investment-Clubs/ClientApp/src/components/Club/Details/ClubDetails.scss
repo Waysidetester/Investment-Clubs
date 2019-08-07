@@ -1,3 +1,16 @@
 .club-details {
-  margin-top: 38px;
+  margin-top: 20px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(0, 0, 0, 0.192);
+}
+
+.club-details:first-of-type {
+  border-top: none;
+}
+
+.club-financial-info{
+  display: flex;
+  padding-top: 33px;
+  justify-content: space-around;
+  font-size: 19px;
 }

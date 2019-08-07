@@ -1,0 +1,27 @@
+.investment-expanded-details{
+  display: flex;
+  flex-flow: wrap;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  margin-bottom: 27px;
+  margin-top: 27px;
+}
+
+.investment-expanded-detail-item{
+  width: 30%;
+  padding:8px;
+}
+
+.investment-expanded-detail-item:hover{
+  border-radius: 8px;
+  background-color: rgba(41, 241, 255, 0.158)
+}
+
+.investment-expanded-detail-container {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: 27px;
+  border: 1px solid rgba(54, 252, 64, 0.253);
+  border-radius: 10px;
+}
