@@ -26,12 +26,12 @@ class ClubInvestmentModal extends React.Component{
               {this.valCheck('Club Investment Amount: ',this.props.InvDetail.dollarsInvested)}
               {this.valCheck('Bond Coupon: ',this.props.InvDetail.debtCoupon)}
               {this.valCheck('Asset Units Purchased: ',this.props.InvDetail.ownershipUnits)}
-              {this.valCheck('Convertable: ',(this.props.InvDetail.convertable ? 'yes':'no'))}
+              {this.valCheck('Convertable: ',(this.props.InvDetail.convertable ? 'Yes':'No'))}
               {this.valCheck('Date Bond Matures: ',this.props.InvDetail.matureDate)}
               {this.valCheck('Equity Bought: ',this.props.InvDetail.percentEquity)}
               {this.valCheck('Date Invested: ',this.props.InvDetail.investDate)}
-              {this.valCheck('Is this Pending? ',this.props.InvDetail.pending ? 'yes' : 'no')}
-              {this.valCheck('Is this club still investing in this company? ',this.props.InvDetail.invested ? 'yes' : 'no')}
+              {this.valCheck('Is this Pending? ',this.props.InvDetail.pending ? 'Yes' : 'No')}
+              {this.valCheck('Is this club still investing in this company? ',this.props.InvDetail.invested ? 'Yes' : 'No')}
             </ModalBody>
             <ModalFooter>
               <Button color="secondary" onClick={this.props.toggle}>Cancel</Button>

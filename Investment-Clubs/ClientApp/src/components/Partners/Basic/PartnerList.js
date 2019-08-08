@@ -6,7 +6,7 @@ class PartnerList extends React.Component{
   Partners = () => {
     let allPartners = []
     for(let i = 0; i < this.props.partners.length; i++){
-      allPartners.push(<li key={i}>{this.props.partners[i].firstName} {this.props.partners[i].lastName}</li>)
+      allPartners.push(<span className='partner-in-club' key={i}>{this.props.partners[i].firstName} {this.props.partners[i].lastName}</span>)
     }
     return allPartners;
   }
@@ -14,9 +14,12 @@ class PartnerList extends React.Component{
   render(){
     if(this.props.partners !== null){
       return(
-        <ul>
-          {this.Partners()}
-        </ul>
+        <div>
+          <span>Partners In Club</span>
+          <div className='club-partner-list-container'>
+            {this.Partners()}
+          </div>
+        </div>
       );
     }
 

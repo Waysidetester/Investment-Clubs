@@ -3,7 +3,6 @@ import ClubDetails from '../Details/ClubDetails';
 import {
   Card,
   CardBody,
-  CardTitle,
 } from 'reactstrap';
 import './ClubDetailsContainer.scss';
 

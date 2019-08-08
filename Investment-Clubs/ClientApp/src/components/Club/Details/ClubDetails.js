@@ -13,7 +13,7 @@ class ClubDetails extends React.Component{
     return(
       <div className='club-details'>
         <div className='single-club-basics'>
-          <h3 className='single-club-title'>Club: {this.props.club.clubName}</h3>
+          <h3 className='single-club-title'>{this.props.club.clubName}</h3>
           <p className='single-club-investable'>{this.props.selfDirected ? 'Potential ' : ''}Club Investable Capital:{this.props.club.clubInvestable}</p>
           <p className='single-club-type'>{this.props.club.selfDirected ? 'This club is self directed' : 'This club invests as a single unit'}</p>
           <div className='single-club-partner-group'>

@@ -1,3 +1,17 @@
 .propose-investment-button{
-  text-align: end;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+}
+
+.partner-list-button-area{
+  padding-right: 50px;
+}
+
+.club-total-investments-group{
+  display: flex;
+}
+
+.prop-inv-button{
+  vertical-align: middle;
 }

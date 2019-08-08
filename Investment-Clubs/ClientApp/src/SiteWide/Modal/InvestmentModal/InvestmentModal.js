@@ -29,7 +29,7 @@ class InvestmentModal extends React.Component{
               {this.valCheck('Club Investment Amount: ',this.props.InvDetail.dollarsInvested.toLocaleString('en-US', {style: 'currency', currency: 'USD'}))}
               {this.valCheck('Bond Coupon: ', this.props.InvDetail.debtCoupon)}
               {this.valCheck('Asset Units Purchased: ',this.props.InvDetail.ownershipUnits)}
-              {this.valCheck('Convertable: ',(this.props.InvDetail.convertable ? 'yes':'no'))}
+              {this.valCheck('Convertable: ',(this.props.InvDetail.convertable ? 'Yes':'No'))}
               {this.valCheck('Date Bond Matures: ',this.props.InvDetail.matureDate)}
               {this.valCheck('Equity Bought: ',this.props.InvDetail.percentEquity)}
               {this.valCheck('Date Invested: ',new Date(this.props.InvDetail.investDate).toLocaleDateString())}

@@ -55,7 +55,7 @@ class ClubInvestments extends React.Component{
     }
 
     return(
-      <div>
+      <div className='club-investment-container'>
         <ClubInvestmentModal modal={this.state.modal} toggle={this.toggle} InvDetail={this.state.InvDetail}/>
         <Table responsive hover>
           <thead>
