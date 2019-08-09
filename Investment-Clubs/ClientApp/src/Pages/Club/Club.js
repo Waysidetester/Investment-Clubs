@@ -93,7 +93,7 @@ class Club extends React.Component{
   render(){
     if(this.state.club !== null){
       return(
-        <div>
+        <div className='club-page-main-container'>
           <Jumbotron>
             <h1 className="display-3">{this.state.club.clubName}</h1>
             <h3>Investable --- {this.state.club.clubInvestable.toLocaleString('en-US', {style: 'currency', currency:'USD'})}</h3>

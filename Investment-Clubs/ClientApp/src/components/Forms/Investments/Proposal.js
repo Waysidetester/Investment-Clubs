@@ -92,7 +92,7 @@ class Proposal extends React.Component{
       <div>
         <Form autoComplete={'off'} onSubmit={(e) => this.handleSubmit(e)}>
           <FormGroup tag="fieldset" >
-            <legend>Radio Buttons</legend>
+            <legend>Asset Type</legend>
             <FormGroup check>
               <Label check>
                 <Input type="radio" name='assetType' value='1' onClick={this.handleChange} required/>

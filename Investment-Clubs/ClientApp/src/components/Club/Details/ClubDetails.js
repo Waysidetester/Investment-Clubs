@@ -25,7 +25,7 @@ class ClubDetails extends React.Component{
           </div>
           <div className='club-financial-info'>
             <p>Currently Funded: {dollarsInvested.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</p>
-            <p>My current contributions {partnerInvestable.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</p>
+            <p>My Monthly Contribution: {partnerInvestable.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</p>
           </div>
         </div>
         <MyInvestments investments={this.props.investments}/>

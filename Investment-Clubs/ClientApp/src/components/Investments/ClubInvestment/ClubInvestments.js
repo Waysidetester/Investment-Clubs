@@ -19,7 +19,7 @@ class ClubInvestments extends React.Component{
 
   // Gets clicked investment detail and sets it to state
   fetchDetail = (invId) => {
-    let investment = this.props.clubInvs.find(inv => inv.investmentId === invId)
+    let investment = this.props.clubInvs.find(inv => inv.id === invId)
     this.setState({InvDetail: investment})
   }
 
@@ -36,10 +36,15 @@ class ClubInvestments extends React.Component{
   // prints a row of relevant investment data
   DataRowShape = (inv, key) => {
     return (
-      <tr key={key} invid={inv.investmentId} onClick={() => this.modalBundle(inv.investmentId)}>
+      <tr key={key} invid={inv.id} onClick={() => this.modalBundle(inv.id)}>
         <td>{inv.receivingEntity}</td>
-        <td>{inv.dollarsInvested}</td>
-        <td>{inv.investDate}</td>
+        <td>{inv.dollarsInvested.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</td>
+        <td>{
+          inv.investDate !== null 
+            ? new Date(inv.investDate).toLocaleDateString('en-US', {dateStyle: 'medium'})
+            : ''
+        }
+        </td>
         <td>{inv.investmentType}</td>
       </tr>
     );

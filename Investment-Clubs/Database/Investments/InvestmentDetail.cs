@@ -109,10 +109,10 @@ namespace Investment_Clubs.Database.Investments
             using (SqlConnection db = new SqlConnection(_connectionString))
             {
                 string querystring = @"	
-                    SELECT i.Id InvestmentId, it.InvestmentType, i.ClubId, i.OwnershipUnits,
+                    SELECT i.Id, it.InvestmentType, i.ClubId, i.OwnershipUnits,
 	                     i.DollarsInvested, i.ReceivingEntity, i.DebtCoupon, i.MatureDate,
 	                     i.ContractPrice, i.PercentEquity, i.InvestDate, i.DivestDate, 
-						 i.Convertable, i.Pending, i.Invested
+						 i.Convertable, i.Pending, i.Invested, i.ProposalExpireDate
                     FROM Club c
 	                    join Investment i on i.ClubId = c.Id
 	                    join InvestmentType it on it.Id = i.AssetType
@@ -175,7 +175,7 @@ namespace Investment_Clubs.Database.Investments
 
                 if (InvestDetail != null)
                 {
-                    return (decimal)InvestDetail;
+                    return Math.Round((decimal)InvestDetail, 2);
                 }
                 else
                 {

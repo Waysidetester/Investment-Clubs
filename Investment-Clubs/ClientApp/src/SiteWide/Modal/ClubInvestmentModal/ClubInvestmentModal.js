@@ -12,6 +12,12 @@ import './ClubInvestmentModal.scss';
 class ClubInvestmentModal extends React.Component{
   valCheck = (text, value) => {
     if(value !== null){
+      if(text === 'Bond Coupon: ' || text === 'Equity Bought: '){
+        return <p>{text}{value.toLocaleString('en-US', {style: 'percent', maximumFractionDigits: 3})}</p>
+      }
+      if(text === 'Date Bond Matures: ' || text === 'Date Invested: '){
+        return <p>{text}{new Date(value).toLocaleDateString('en-US', {dateStyle: 'short'})}</p>
+      }
       return <p>{text}{value}</p>
     }
   }
@@ -26,12 +32,14 @@ class ClubInvestmentModal extends React.Component{
               {this.valCheck('Club Investment Amount: ',this.props.InvDetail.dollarsInvested)}
               {this.valCheck('Bond Coupon: ',this.props.InvDetail.debtCoupon)}
               {this.valCheck('Asset Units Purchased: ',this.props.InvDetail.ownershipUnits)}
-              {this.valCheck('Convertable: ',(this.props.InvDetail.convertable ? 'Yes':'No'))}
+              {this.valCheck('Convertible: ',(this.props.InvDetail.convertable ? 'Yes':'No'))}
               {this.valCheck('Date Bond Matures: ',this.props.InvDetail.matureDate)}
               {this.valCheck('Equity Bought: ',this.props.InvDetail.percentEquity)}
               {this.valCheck('Date Invested: ',this.props.InvDetail.investDate)}
-              {this.valCheck('Is this Pending? ',this.props.InvDetail.pending ? 'Yes' : 'No')}
-              {this.valCheck('Is this club still investing in this company? ',this.props.InvDetail.invested ? 'Yes' : 'No')}
+              {this.valCheck('',this.props.InvDetail.pending ? 'This investment is Pending'
+               : 'This investment is no longer pending')}
+              {this.props.InvDetail.pending ? ''
+              : this.valCheck('Is this club currently invested in this company? ',this.props.InvDetail.invested ? 'YES' : 'NO')}
             </ModalBody>
             <ModalFooter>
               <Button color="secondary" onClick={this.props.toggle}>Cancel</Button>

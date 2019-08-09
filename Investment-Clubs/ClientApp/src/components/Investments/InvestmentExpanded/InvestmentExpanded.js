@@ -23,7 +23,7 @@ class InvestmentExpanded extends React.Component{
       {/* check if there is a value and return info if there is */}
       {this.Checker(this.props.inv.receivingEntity) ? <h3>Offering Party: {this.props.inv.receivingEntity}</h3> : null}
       <div className='investment-expanded-details'>
-        {this.Checker(this.props.inv.ownershipUnits) ? <div className='investment-expanded-detail-item'>Units: {this.props.inv.ownershipUnits}</div> : null}
+        {this.Checker(this.props.inv.ownershipUnits) ? <div className='investment-expanded-detail-item'>Units: {new Number(this.props.inv.ownershipUnits).toLocaleString('en-US',{style: 'decimal'})}</div> : null}
         {this.Checker(this.props.inv.dollarsInvested) ? <div className='investment-expanded-detail-item'>Proposed Investment Price: {this.props.inv.dollarsInvested.toLocaleString('en-US', {style:'currency', currency:'USD'})}</div> : null}
         {this.Checker(this.props.inv.debtCoupon) ? <div className='investment-expanded-detail-item'>Coupon Rate: {this.props.inv.debtCoupon}</div> : null}
         {this.Checker(this.props.inv.matureDate) ? <div className='investment-expanded-detail-item'>Maturity Date: {new Date(this.props.inv.matureDate).toLocaleDateString()}</div> : null}
