@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Investment_Clubs.Models.Clubs
+﻿namespace Investment_Clubs.Models.Clubs
 {
     public class UsersClubDetails : UsersClubs
     {
@@ -13,5 +8,6 @@ namespace Investment_Clubs.Models.Clubs
         public decimal PartnerInvestable { get; set; }
         public bool isAdmin { get; set; }
         public decimal DollarsInvested { get; set; }
+        public decimal Contributing { get; set; }
     }
 }

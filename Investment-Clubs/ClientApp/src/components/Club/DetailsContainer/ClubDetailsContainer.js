@@ -47,8 +47,7 @@ class ClubDetailsContainer extends React.Component{
 
     return(
       <div>
-        <h2>Your Clubs</h2>
-        <Card>
+        <Card className='club-detail-card-container'>
           <CardBody>
             {this.ClubDetailGenerator()}
           </CardBody>

@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Investment_Clubs.Database.Clubs;
+﻿using Investment_Clubs.Database.Clubs;
 using Investment_Clubs.Database.Investments;
 using Investment_Clubs.Models.Investments;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Investment_Clubs.Controllers
 {

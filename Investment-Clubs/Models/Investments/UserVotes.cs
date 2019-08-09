@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Investment_Clubs.Models.Investments
+﻿namespace Investment_Clubs.Models.Investments
 {
     public class UserVotes : IUserVotes
     {

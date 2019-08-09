@@ -22,7 +22,7 @@ class ClubsBasicsContainer extends React.Component{
 
     return(
       <div className='home-club-card'>
-        <h2>Your Clubs</h2>
+        <h3>Your Clubs</h3>
         <Card >
           <CardBody>
             {this.ClubBasicsGenerator()}

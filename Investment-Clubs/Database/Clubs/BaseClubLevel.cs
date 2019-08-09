@@ -1,12 +1,10 @@
-﻿using Microsoft.Extensions.Options;
+﻿using Dapper;
+using Investment_Clubs.Models.Clubs;
+using Investment_Clubs.Models.Partners;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using Dapper;
-using System.Linq;
-using System.Threading.Tasks;
-using Investment_Clubs.Models.Clubs;
-using Investment_Clubs.Models.Partners;
 
 namespace Investment_Clubs.Database.Clubs
 {

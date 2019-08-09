@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Investment_Clubs.Models.Investments
+﻿namespace Investment_Clubs.Models.Investments
 {
     public class ProfileInvestmentDetails : IUserInvestment, IPartnerInvestment
     {
@@ -15,5 +10,7 @@ namespace Investment_Clubs.Models.Investments
         public decimal PercentContributed { get; set; }
         public decimal PartnerContributed { get; set; }
         public decimal TotalInvestment { get; set; }
+        public decimal Contributing { get; set; }
+
     }
 }

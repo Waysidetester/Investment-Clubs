@@ -7,6 +7,7 @@ class ClubDetails extends React.Component{
   render(){
     const dollarsInvested = this.props.club.dollarsInvested;
     const partnerInvestable = this.props.club.partnerInvestable
+    const clubInvestable = this.props.club.clubInvestable
 
     const nonAccreditedPartners = this.props.club.partnerCount - this.props.club.accreditedPartnerCount;
 
@@ -14,7 +15,8 @@ class ClubDetails extends React.Component{
       <div className='club-details'>
         <div className='single-club-basics'>
           <h3 className='single-club-title'>{this.props.club.clubName}</h3>
-          <p className='single-club-investable'>{this.props.selfDirected ? 'Potential ' : ''}Club Investable Capital:{this.props.club.clubInvestable}</p>
+          <p className='single-club-investable'>{this.props.selfDirected ? 'Potential ' : ''}Club Investable Capital: {clubInvestable.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</p>
+          <p className='single-club-investable'>Investable Capital From Me: {partnerInvestable.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</p>
           <p className='single-club-type'>{this.props.club.selfDirected ? 'This club is self directed' : 'This club invests as a single unit'}</p>
           <div className='single-club-partner-group'>
             <p className='single-club-total-partners'>Total Involved Partners: {this.props.club.partnerCount}</p>

@@ -15,13 +15,30 @@ class Club extends React.Component{
     votes: null,
     clubInvs: [],
     partners: null,
-    clubROI: null
+    clubROI: null,
+    partnerROI: null,
+  }
+
+  // checks search params of url for club id
+  getThatClub = (searchParams) => {
+    let startIndex = searchParams.indexOf('clubId=')
+    let idEnd = searchParams.indexOf('&',startIndex)
+    let justBeforeIdIndex = searchParams.indexOf('=',startIndex)
+    if (idEnd === -1){
+      
+      return searchParams.substring(justBeforeIdIndex + 1)
+    }
+    return searchParams.substring(justBeforeIdIndex + 1, idEnd)
   }
 
   componentDidMount(){
-    this.DbCalls([
-      {funct: ProspGerm.GetVotesForUser, stateName:'votes'},
-    ]);
+    ProspGerm.GetVotesForUser(this.props.currentUser)
+      .then(res => {
+        const currentClub = this.getThatClub(this.props.location.search)
+        const matchPendVotes = res.data.filter(vote => vote.clubId === parseInt(currentClub, 10))
+        this.setState({votes: matchPendVotes})
+      })
+      .catch(err => console.error(err));
 
     ProspGerm.DetailsForClub(this.props.location.search)
       .then(res => {
@@ -97,7 +114,7 @@ class Club extends React.Component{
           <Jumbotron>
             <h1 className="display-3">{this.state.club.clubName}</h1>
             <h3>Investable --- {this.state.club.clubInvestable.toLocaleString('en-US', {style: 'currency', currency:'USD'})}</h3>
-            <h3>Invested --- {this.state.club.dollarsInvested.toLocaleString('en-US', {style: 'currency', currency:'USD'})}</h3>
+            <h3>Currently Invested --- {this.state.club.dollarsInvested.toLocaleString('en-US', {style: 'currency', currency:'USD'})}</h3>
             <hr className="my-2" />
             <p>Club members: {this.state.club.partnerCount}</p>
             <p>Accredited members: {this.state.club.accreditedPartnerCount}</p>

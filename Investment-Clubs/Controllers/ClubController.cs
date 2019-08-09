@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Investment_Clubs.Database.Clubs;
+﻿using Investment_Clubs.Database.Clubs;
 using Investment_Clubs.Database.Investments;
 using Investment_Clubs.Models.Investments;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Investment_Clubs.Controllers
 {

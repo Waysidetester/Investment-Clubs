@@ -1,9 +1,9 @@
-﻿using System;
-using System.Data.SqlClient;
-using System.Collections.Generic;
-using Microsoft.Extensions.Options;
+﻿using Dapper;
 using Investment_Clubs.Models.Clubs;
-using Dapper;
+using Microsoft.Extensions.Options;
+using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
 
 namespace Investment_Clubs.Database.Clubs
 {
@@ -38,18 +38,6 @@ namespace Investment_Clubs.Database.Clubs
             throw new Exception("User is not involved with any clubs");
         }
 
-        /*
-           SELECT p.id PartnerId, pc.id PartnerClubId, pc.IsAdmin, pc.Investable PartnerInvestable,
-	            pci.PercentContributed, i.DollarsInvested MoneyInvestedIn, c.Id ClubId,
-	            c.ClubName, c.PartnerCount, c.AccreditedPartnerCount, c.DollarsInvested,
-	            c.ClubInvestable, c.SelfDirected
-            FROM Partner p
-	            join PartnerClub pc on p.Id = pc.PartnerId
-	            join Club c on c.Id = pc.ClubId
-	            join PartnerClubInvestment pci on pci.PartnerClubId = pc.id
-	            join Investment i on i.ClubId = c.Id
-            WHERE p.Id = 1 and pc.ApprovedMember = 1 and i.Pending = 0
-        */
         internal IEnumerable<IUsersClubs> GetClubDetailsForUser(int partnerId)
         {
             using (SqlConnection db = new SqlConnection(_connectionString))
@@ -57,11 +45,11 @@ namespace Investment_Clubs.Database.Clubs
                 string selectQuery = @"
                     SELECT p.id PartnerId, pc.id PartnerClubId, pc.IsAdmin, pc.Investable PartnerInvestable,
 	                    c.Id ClubId, c.ClubName, c.PartnerCount, c.AccreditedPartnerCount, c.DollarsInvested,
-	                    c.ClubInvestable, c.SelfDirected
+	                    c.ClubInvestable, c.SelfDirected, pc.Contributing
                     FROM Partner p
 	                    join PartnerClub pc on p.Id = pc.PartnerId
 	                    join Club c on c.Id = pc.ClubId
-                    WHERE p.Id = 1 and pc.ApprovedMember = 1";
+                    WHERE p.Id = @PartnerId and pc.ApprovedMember = 1";
                 var parameters = new { PartnerId = partnerId };
 
                 var clubs = db.Query<UsersClubDetails>(selectQuery, parameters);

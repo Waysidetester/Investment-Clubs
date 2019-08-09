@@ -1,10 +1,10 @@
-﻿using Investment_Clubs.Models.Investments;
+﻿using Dapper;
+using Investment_Clubs.Models.Investments;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
-using Dapper;
 
 namespace Investment_Clubs.Database.Investments
 {
@@ -176,10 +176,6 @@ namespace Investment_Clubs.Database.Investments
                 if (InvestDetail != null)
                 {
                     return Math.Round((decimal)InvestDetail, 2);
-                }
-                else
-                {
-                    return 0;
                 }
             }
             throw new Exception("I cannot get the partner's ROI for this club");

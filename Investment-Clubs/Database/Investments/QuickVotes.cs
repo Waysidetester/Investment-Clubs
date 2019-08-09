@@ -1,10 +1,10 @@
-﻿using System;
-using System.Linq;
+﻿using Dapper;
+using Investment_Clubs.Models.Investments;
+using Microsoft.Extensions.Options;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using Microsoft.Extensions.Options;
-using Investment_Clubs.Models.Investments;
-using Dapper;
+using System.Linq;
 
 namespace Investment_Clubs.Database.Investments
 {
@@ -61,33 +61,6 @@ namespace Investment_Clubs.Database.Investments
             }
             throw new Exception("trouble getting votes for user");
         }
-
-        //internal IEnumerable<IUserVotes> GetPendingVotesForClub(int clubId)
-        //{
-        //    using (SqlConnection db = new SqlConnection(_connectionString))
-        //    {
-        //        string querystring = @"
-        //                            SELECT pci.id, p.id PartnerId, pci.Vote, pci.Abstain, pc.ClubId,
-        //                                i.ReceivingEntity, c.ClubName, it.InvestmentType, i.Id InvestmentId
-        //                            FROM Partner as p
-	       //                             join PartnerClub as pc on pc.PartnerId = p.Id
-	       //                             join PartnerClubInvestment as pci on pci.PartnerClubId = pc.Id
-	       //                             join Investment as i on i.Id = pci.InvestmentId
-	       //                             join Club as c on c.Id = pc.ClubId
-	       //                             join InvestmentType as it on it.Id = i.AssetType
-        //                            WHERE p.Id=@ClubId and i.Pending=1 and pc.ApprovedMember=1";
-        //        var parameters = new { ClubId = clubId };
-
-        //        var pendingInvestments = db.Query<PendingVotes>(querystring, parameters);
-
-        //        if (pendingInvestments != null)
-        //        {
-        //            return pendingInvestments;
-        //        }
-        //    }
-        //    throw new Exception("trouble getting votes for user");
-        //}
-
 
         internal IUserVotes CastUserVote(UserVotes submittedVote)
         {

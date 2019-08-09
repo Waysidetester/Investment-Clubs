@@ -1,11 +1,11 @@
+using Investment_Clubs.Database.Clubs;
+using Investment_Clubs.Database.Investments;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Investment_Clubs.Database.Clubs;
-using Investment_Clubs.Database.Investments;
 
 namespace Investment_Clubs
 {
